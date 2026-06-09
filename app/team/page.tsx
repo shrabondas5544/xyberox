@@ -130,7 +130,6 @@ export default function TeamPage() {
   return (
     <div className="relative flex-1 py-16 sm:py-24 overflow-hidden">
       {/* Background visual accents */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-35 dark:bg-[radial-gradient(45rem_50rem_at_top,theme(colors.zinc.900),theme(colors.zinc.950))] dark:opacity-85" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[350px] w-[600px] rounded-full bg-gradient-to-tr from-purple-500/10 to-indigo-500/15 blur-3xl dark:from-purple-500/5 dark:to-indigo-500/5" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

@@ -4,7 +4,6 @@ export default function Home() {
   return (
     <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden py-16 sm:py-24">
       {/* Dynamic Background Gradients */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-40 dark:bg-[radial-gradient(45rem_50rem_at_top,theme(colors.zinc.900),theme(colors.zinc.950))] dark:opacity-80" />
       <div className="absolute top-0 right-1/4 -z-10 h-[400px] w-[600px] rounded-full bg-gradient-to-tr from-purple-500/10 to-indigo-500/20 blur-3xl dark:from-purple-500/5 dark:to-indigo-500/10" />
       <div className="absolute bottom-10 left-1/4 -z-10 h-[300px] w-[500px] rounded-full bg-gradient-to-br from-pink-500/10 to-purple-500/15 blur-3xl dark:from-pink-500/5 dark:to-purple-500/5" />
 

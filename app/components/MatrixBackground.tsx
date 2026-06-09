@@ -96,7 +96,7 @@ export default function MatrixBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-50 pointer-events-none opacity-20 bg-black"
+      className="fixed inset-0 w-full h-full -z-50 pointer-events-none opacity-40 bg-black"
     />
   );
 }
