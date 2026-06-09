@@ -29,7 +29,7 @@ export default function Home() {
         </p>
 
         {/* Interactive Terminal Console */}
-        <div className="mt-8 w-full max-w-lg">
+        <div className="mt-8 w-full max-w-2xl">
           <TerminalConsole />
         </div>
 
