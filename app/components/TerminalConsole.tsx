@@ -63,7 +63,7 @@ const rows: KeyConfig[][] = [
     { label: "A", value: "a", shiftValue: "A" },
     { label: "S", value: "s", shiftValue: "S" },
     { label: "D", value: "d", shiftValue: "D" },
-    { label: "F", value: "f", strokeWidth: "F" }, // note: fixed typo in custom schema if any, let's keep value
+    { label: "F", value: "f", shiftValue: "F" },
     { label: "G", value: "g", shiftValue: "G" },
     { label: "H", value: "h", shiftValue: "H" },
     { label: "J", value: "j", shiftValue: "J" },
@@ -102,9 +102,6 @@ const rows: KeyConfig[][] = [
   ]
 ];
 
-// Fixed key configs typing values
-rows[3][4] = { label: "F", value: "f", shiftValue: "F" };
-
 export default function TerminalConsole() {
   const [lines, setLines] = useState<string[]>([]);
   const [currentInput, setCurrentInput] = useState("");
@@ -126,13 +123,14 @@ export default function TerminalConsole() {
     }
   }, [lines, currentInput]);
 
-  // Handle responsive keyboard scaling without stretching page width
+  // Handle responsive keyboard scaling via ResizeObserver (highly reliable on mobile mount)
   useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current && keyboardRef.current) {
-        // Measure the container's width (its parent constraint)
-        const parentWidth = containerRef.current.getBoundingClientRect().width || containerRef.current.offsetWidth;
-        const naturalWidth = 600; // Natural width of the keyboard
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const parentWidth = entry.contentRect.width;
+        const naturalWidth = 600; // design width of the keyboard
 
         if (parentWidth < naturalWidth && parentWidth > 0) {
           const newScale = parentWidth / naturalWidth;
@@ -141,17 +139,16 @@ export default function TerminalConsole() {
           setScale(1);
         }
 
-        // Measure actual unscaled height of the keyboard
-        // We temporarily reset styling or read offsetHeight
-        setKeyboardHeight(keyboardRef.current.offsetHeight || 240);
+        if (keyboardRef.current) {
+          setKeyboardHeight(keyboardRef.current.offsetHeight || 240);
+        }
       }
-    };
+    });
 
-    const timer = setTimeout(handleResize, 100);
-    window.addEventListener("resize", handleResize);
+    observer.observe(containerRef.current);
+
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", handleResize);
+      observer.disconnect();
     };
   }, []);
 
