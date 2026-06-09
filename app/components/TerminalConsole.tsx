@@ -109,7 +109,12 @@ export default function TerminalConsole() {
   const [shiftActive, setShiftActive] = useState(false);
   const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
 
+  const [scale, setScale] = useState(1);
+  const [keyboardHeight, setKeyboardHeight] = useState(240);
+
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const keyboardRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom on input/history changes
   useEffect(() => {
@@ -117,6 +122,32 @@ export default function TerminalConsole() {
       terminalEndRef.current.scrollTop = terminalEndRef.current.scrollHeight;
     }
   }, [lines, currentInput]);
+
+  // Handle responsive keyboard scaling
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current && keyboardRef.current) {
+        const parentWidth = containerRef.current.offsetWidth;
+        const naturalWidth = 600; // design width of keyboard
+
+        if (parentWidth < naturalWidth) {
+          const newScale = parentWidth / naturalWidth;
+          setScale(newScale);
+          setKeyboardHeight(keyboardRef.current.offsetHeight);
+        } else {
+          setScale(1);
+          setKeyboardHeight(keyboardRef.current.offsetHeight);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleResize, 100);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Execute terminal command
   const executeCommand = () => {
@@ -255,7 +286,6 @@ export default function TerminalConsole() {
   // Synchronize physical keyboard interactions
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Avoid capturing default hotkeys unless we want to control input typing
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
       let matchedKey: KeyConfig | null = null;
@@ -301,7 +331,6 @@ export default function TerminalConsole() {
         matchedKey = { type: "arrow-down", label: "▼" };
         keyId = "▼";
       } else {
-        // Search virtual rows to find character match
         for (const row of rows) {
           const found = row.find(
             (k) =>
@@ -326,7 +355,6 @@ export default function TerminalConsole() {
           });
         }
 
-        // Handle text state changes
         if (physicalKey === "Backspace") {
           setCurrentInput((prev) => prev.slice(0, -1));
         } else if (physicalKey === "Enter") {
@@ -401,7 +429,7 @@ export default function TerminalConsole() {
   }, [capsLock, shiftActive, currentInput, lines]);
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center" ref={containerRef}>
       {/* Terminal Display Card */}
       <div className="w-full rounded-sm border border-green-500/30 bg-black/85 text-left font-mono text-xs sm:text-sm text-green-400 p-4 shadow-[0_0_15px_rgba(0,255,65,0.08)] mb-6 overflow-hidden select-none">
         {/* Terminal Header */}
@@ -430,9 +458,24 @@ export default function TerminalConsole() {
         </div>
       </div>
 
-      {/* Cyberpunk Interactive Virtual Keyboard */}
-      <div className="keyboard-container w-full">
-        <div className="keyboard mx-auto">
+      {/* Cyberpunk Interactive Virtual Keyboard Container */}
+      <div 
+        className="keyboard-container w-full"
+        style={{ 
+          height: `${keyboardHeight * scale}px`, 
+          overflow: "visible" 
+        }}
+      >
+        <div 
+          ref={keyboardRef}
+          className="keyboard mx-auto"
+          style={{ 
+            transform: scale < 1 ? `scale(${scale})` : "none", 
+            transformOrigin: "top center",
+            width: scale < 1 ? "600px" : "100%",
+            maxWidth: scale < 1 ? "none" : "600px"
+          }}
+        >
           {rows.map((row, rowIndex) => (
             <div key={rowIndex} className="row">
               {row.map((key, keyIndex) => {
@@ -603,42 +646,7 @@ export default function TerminalConsole() {
         .cursor-blink {
           animation: customBlink 1.2s step-end infinite;
         }
-
-        @media (max-w: 640px) {
-          .keyboard {
-            padding: 8px;
-            border-radius: 8px;
-            gap: 3px;
-          }
-          .row {
-            gap: 2px;
-          }
-          .key {
-            min-width: 12px;
-            padding: 4px 1px;
-            font-size: 7px;
-            border-radius: 3px;
-          }
-          .function-key {
-            max-height: 18px;
-            padding: 2px;
-            font-size: 5px;
-          }
-          .space-key {
-            min-width: 70px;
-          }
-          .command-key,
-          .alt-key {
-            font-size: 7px;
-            min-width: 15px;
-          }
-          .eject-key {
-            margin-left: 4px;
-            padding: 2px 6px;
-          }
-        }
       `}</style>
     </div>
   );
 }
-
