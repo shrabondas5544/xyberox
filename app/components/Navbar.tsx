@@ -20,6 +20,107 @@ export default function Navbar() {
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+
+  // Sync volume state with HTML5 audio properties
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+      audioRef.current.muted = isMuted;
+    }
+  }, [volume, isMuted]);
+
+  // Handle autoplay and fallback interaction listeners
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = volume;
+    audio.muted = isMuted;
+
+    const attemptPlay = () => {
+      audio.play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.log("Autoplay blocked. Adding user interaction listener.", error);
+          
+          const startAudioOnInteraction = () => {
+            audio.play()
+              .then(() => {
+                setIsPlaying(true);
+                cleanupListeners();
+              })
+              .catch((err) => console.log("Failed to play on interaction:", err));
+          };
+
+          const cleanupListeners = () => {
+            document.removeEventListener("click", startAudioOnInteraction);
+            document.removeEventListener("keydown", startAudioOnInteraction);
+            document.removeEventListener("touchstart", startAudioOnInteraction);
+          };
+
+          document.addEventListener("click", startAudioOnInteraction);
+          document.addEventListener("keydown", startAudioOnInteraction);
+          document.addEventListener("touchstart", startAudioOnInteraction);
+        });
+    };
+
+    attemptPlay();
+
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+
+    audio.addEventListener("play", onPlay);
+    audio.addEventListener("pause", onPause);
+
+    return () => {
+      audio.removeEventListener("play", onPlay);
+      audio.removeEventListener("pause", onPause);
+    };
+  }, []);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      const nextMute = !isMuted;
+      setIsMuted(nextMute);
+      if (!nextMute && audioRef.current.paused) {
+        audioRef.current.play().catch((e) => console.log(e));
+      }
+    }
+  };
+
+  const adjustVolume = (amount: number) => {
+    setVolume((prev) => {
+      const newVol = Math.min(Math.max(0, prev + amount), 1);
+      if (audioRef.current) {
+        audioRef.current.volume = newVol;
+        if (newVol > 0 && isMuted) {
+          setIsMuted(false);
+        }
+        if (audioRef.current.paused) {
+          audioRef.current.play().catch((e) => console.log(e));
+        }
+      }
+      return newVol;
+    });
+  };
+
+  const handleVolumeBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newVolume = Math.min(Math.max(0, clickX / rect.width), 1);
+    setVolume(newVolume);
+    setIsMuted(false);
+    if (audioRef.current && audioRef.current.paused) {
+      audioRef.current.play().catch((e) => console.log(e));
+    }
+  };
+
   // Close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -67,6 +168,12 @@ export default function Navbar() {
 
   return (
     <>
+      <audio
+        ref={audioRef}
+        src="https://archive.org/download/matrix-soundtrack-collection/Matrix%20Revolutions/1.Soundtrack/16.%20Navras%20(by%20Juno%20Reactor%20Vs.%20Don%20Davis).mp3"
+        loop
+        preload="auto"
+      />
       <nav className="sticky top-0 z-50 w-full border-b border-green-500/20 bg-black/80 backdrop-blur-md transition-colors duration-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -170,14 +277,74 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Right Action Button (Cyberpunk Glowing Button) */}
+            {/* Right Action Button (Matrix Audio Player & Speaker Controls) */}
             <div className="hidden md:flex md:items-center">
-              <Link
-                href="/prototype"
-                className="inline-flex items-center justify-center rounded-sm border border-green-500 bg-transparent px-5 py-1.5 text-xs font-mono font-bold tracking-widest text-green-400 shadow-[0_0_8px_rgba(34,197,94,0.2)] transition-all duration-350 hover:bg-green-500 hover:text-black hover:shadow-[0_0_18px_rgba(34,197,94,0.5)]"
-              >
-                LAUNCH_DEMO
-              </Link>
+              <div className="flex items-center gap-3 rounded-md border border-green-500/30 bg-black/60 px-3 py-1.5 font-mono text-xs shadow-[0_0_8px_rgba(34,197,94,0.15)] transition-all duration-300 hover:border-green-500/50 hover:shadow-[0_0_12px_rgba(34,197,94,0.25)]">
+                {/* Speaker Toggle */}
+                <button
+                  onClick={toggleMute}
+                  className={`flex h-7 w-7 items-center justify-center rounded-sm border transition-all duration-200 ${
+                    isMuted 
+                      ? "border-red-500/30 bg-red-950/20 text-red-400 hover:bg-red-950/40 hover:border-red-500/50" 
+                      : "border-green-500/30 bg-green-950/20 text-green-400 hover:bg-green-950/40 hover:border-green-500/50"
+                  }`}
+                  title={isMuted ? "Unmute Audio" : "Mute Audio"}
+                >
+                  {isMuted ? (
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <line x1="23" y1="9" x2="17" y2="15" />
+                      <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                  ) : (
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  )}
+                </button>
+
+                {/* Vol Down */}
+                <button
+                  onClick={() => adjustVolume(-0.1)}
+                  className="flex h-5 w-5 items-center justify-center rounded-sm border border-green-500/30 bg-green-950/10 text-green-400 hover:bg-green-950/30 hover:text-green-300 font-bold"
+                  title="Volume Down"
+                >
+                  <span className="leading-none">-</span>
+                </button>
+
+                {/* Volume Slider Bar */}
+                <div 
+                  onClick={handleVolumeBarClick}
+                  className="group relative h-2.5 w-16 cursor-pointer rounded-sm border border-green-500/20 bg-zinc-950"
+                  title={`Volume: ${Math.round(volume * 100)}%`}
+                >
+                  <div 
+                    className="h-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.7)] transition-all duration-100" 
+                    style={{ width: `${isMuted ? 0 : volume * 100}%` }}
+                  />
+                  {/* Subtle visual notches */}
+                  <div className="absolute top-0 right-0 bottom-0 left-0 flex justify-between pointer-events-none px-1 opacity-20">
+                    <span className="h-full w-[1px] bg-green-500" />
+                    <span className="h-full w-[1px] bg-green-500" />
+                    <span className="h-full w-[1px] bg-green-500" />
+                  </div>
+                </div>
+
+                {/* Vol Up */}
+                <button
+                  onClick={() => adjustVolume(0.1)}
+                  className="flex h-5 w-5 items-center justify-center rounded-sm border border-green-500/30 bg-green-950/10 text-green-400 hover:bg-green-950/30 hover:text-green-300 font-bold"
+                  title="Volume Up"
+                >
+                  <span className="leading-none">+</span>
+                </button>
+
+                {/* Mini track title/indicator */}
+                <span className="text-[10px] tracking-wider text-green-500/70 select-none animate-pulse">
+                  NAVRAS
+                </span>
+              </div>
             </div>
 
             {/* Mobile menu button (Hamburger) */}
@@ -310,14 +477,73 @@ export default function Navbar() {
               })}
             </div>
             
-            <div className="py-6">
-              <Link
-                href="/prototype"
-                onClick={() => setIsOpen(false)}
-                className="flex w-full items-center justify-center rounded-sm bg-transparent border border-green-500 py-3 text-center text-base font-mono font-bold tracking-widest text-green-400 shadow-[0_0_8px_rgba(34,197,94,0.15)] hover:bg-green-500 hover:text-black transition-all duration-300"
-              >
-                LAUNCH_DEMO
-              </Link>
+            <div className="py-6 border-t border-green-500/10">
+              <div className="flex flex-col gap-4 rounded-md border border-green-500/30 bg-black/40 p-4 font-mono text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs tracking-wider text-green-400">AUDIO SYSTEM</span>
+                  <span className="text-xs tracking-widest text-green-500/70 animate-pulse">NAVRAS.MP3</span>
+                </div>
+                
+                <div className="flex items-center justify-between gap-4">
+                  {/* Speaker Toggle */}
+                  <button
+                    onClick={toggleMute}
+                    className={`flex h-10 w-10 items-center justify-center rounded-sm border transition-all duration-200 ${
+                      isMuted 
+                        ? "border-red-500/30 bg-red-950/20 text-red-400" 
+                        : "border-green-500/30 bg-green-950/20 text-green-400"
+                    }`}
+                  >
+                    {isMuted ? (
+                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <line x1="23" y1="9" x2="17" y2="15" />
+                        <line x1="17" y1="9" x2="23" y2="15" />
+                      </svg>
+                    ) : (
+                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                      </svg>
+                    )}
+                  </button>
+
+                  <div className="flex flex-1 items-center gap-2">
+                    {/* Vol Down */}
+                    <button
+                      onClick={() => adjustVolume(-0.1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-sm border border-green-500/30 bg-green-950/10 text-green-400 hover:bg-green-950/30 font-bold"
+                    >
+                      -
+                    </button>
+
+                    {/* Volume Slider Bar */}
+                    <div 
+                      onClick={handleVolumeBarClick}
+                      className="group relative h-4 flex-1 cursor-pointer rounded-sm border border-green-500/20 bg-zinc-950"
+                    >
+                      <div 
+                        className="h-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.7)] transition-all duration-100" 
+                        style={{ width: `${isMuted ? 0 : volume * 100}%` }}
+                      />
+                      <div className="absolute top-0 right-0 bottom-0 left-0 flex justify-between pointer-events-none px-2 opacity-20">
+                        <span className="h-full w-[1px] bg-green-500" />
+                        <span className="h-full w-[1px] bg-green-500" />
+                        <span className="h-full w-[1px] bg-green-500" />
+                        <span className="h-full w-[1px] bg-green-500" />
+                      </div>
+                    </div>
+
+                    {/* Vol Up */}
+                    <button
+                      onClick={() => adjustVolume(0.1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-sm border border-green-500/30 bg-green-950/10 text-green-400 hover:bg-green-950/30 font-bold"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
