@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   description: "Next-generation robotics website with responsive design, literature review, weekly updates, and real-time prototype details.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full dark antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full dark antialiased overflow-x-hidden`}
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
         {/* Animated Matrix Background */}
