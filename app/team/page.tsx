@@ -1,5 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+
+// Import Nijum Barua's picture
+import nijumPic from "./Nijum baruya.png";
 
 interface TeamMember {
   name: string;
@@ -18,7 +22,7 @@ export const metadata = {
   description: "Meet the brilliant minds and supervisors behind the Xyberox Autonomous Robotics initiative at Independent University Bangladesh.",
 };
 
-// CyberAvatar HUD graphics
+// CyberAvatar HUD graphics for members without photos
 function CyberAvatar({ name, index, id }: { name: string; index: number; id: string }) {
   const initials = name.split(" ").map(n => n[0]).join("").substring(0, 2);
   const authNum = String(index + 1).padStart(2, "0");
@@ -349,8 +353,35 @@ export default function TeamPage() {
                       
                       {/* Avatar frame */}
                       <div className="relative w-60 h-60 sm:w-64 sm:h-64 bg-black border border-green-500/30 rounded-sm overflow-hidden flex items-center justify-center">
-                        {/* Interactive scanline and grid background */}
-                        <CyberAvatar name={member.name} index={index} id={member.id} />
+                        {member.name === "Nijum Barua" ? (
+                          <div className="relative w-full h-full">
+                            {/* Glowing back background effect */}
+                            <div className="absolute -inset-2 bg-gradient-to-t from-green-500/20 via-green-500/10 to-green-500/0 blur-xl rounded-full" />
+                            <div className="absolute -inset-1 bg-emerald-500/10 blur-md rounded-full animate-pulse" />
+
+                            {/* Cyberpunk glitching image */}
+                            <Image 
+                              src={nijumPic}
+                              alt={member.name}
+                              fill
+                              sizes="(max-width: 640px) 240px, 256px"
+                              className="object-cover animate-cyber-glitch"
+                              priority
+                            />
+
+                            {/* Faded vignette below */}
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none z-10" />
+                            
+                            {/* High-tech border overlays */}
+                            <div className="absolute top-2 left-2 border-t border-l border-green-500/50 w-4 h-4 z-20" />
+                            <div className="absolute top-2 right-2 border-t border-r border-green-500/50 w-4 h-4 z-20" />
+                            <div className="absolute bottom-2 left-2 border-b border-l border-green-500/50 w-4 h-4 z-20" />
+                            <div className="absolute bottom-2 right-2 border-b border-r border-green-500/50 w-4 h-4 z-20" />
+                          </div>
+                        ) : (
+                          /* Interactive scanline and grid background */
+                          <CyberAvatar name={member.name} index={index} id={member.id} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -468,6 +499,40 @@ export default function TeamPage() {
           </div>
         </div>
       </div>
+
+      {/* Cyberpunk Glitch & Core CSS Animations */}
+      <style>{`
+        @keyframes cyber-glitch {
+          0%, 88%, 100% {
+            transform: none;
+            filter: none;
+            clip-path: none;
+          }
+          89% {
+            transform: translate(-4px, 2px) skewX(2deg);
+            filter: hue-rotate(60deg) saturate(1.5) contrast(1.2);
+            clip-path: inset(10% 0 80% 0);
+          }
+          90% {
+            transform: translate(4px, -2px) skewX(-2deg);
+            filter: hue-rotate(-60deg) saturate(2) brightness(1.2);
+            clip-path: inset(70% 0 5% 0);
+          }
+          91% {
+            transform: translate(-2px, 3px);
+            filter: invert(0.05) contrast(1.3);
+            clip-path: inset(40% 0 40% 0);
+          }
+          92% {
+            transform: none;
+            filter: none;
+            clip-path: none;
+          }
+        }
+        .animate-cyber-glitch {
+          animation: cyber-glitch 2s infinite linear;
+        }
+      `}</style>
     </div>
   );
 }
