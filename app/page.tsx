@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TerminalConsole from "./components/TerminalConsole";
 
 export default function Home() {
   return (
@@ -26,6 +27,11 @@ export default function Home() {
         <p className="mt-6 max-w-2xl text-base sm:text-lg font-mono text-zinc-400 leading-relaxed">
           // ACCESSING DATABASE... Welcome to the official repository and documentation platform for the Xyberox autonomous systems initiative. Analyze our telemetry, review literature surveys, and inspect system methodologies.
         </p>
+
+        {/* Interactive Terminal Console */}
+        <div className="mt-8 w-full max-w-lg">
+          <TerminalConsole />
+        </div>
 
         {/* CTA Buttons (Cyberpunk Style) */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
