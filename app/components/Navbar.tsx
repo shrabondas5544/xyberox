@@ -16,15 +16,15 @@ interface NavItem {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isProjectOpen, setIsProjectOpen] = useState(false);
-  const [isMobileProjectOpen, setIsMobileProjectOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsProjectOpen(false);
+        setOpenDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -47,7 +47,18 @@ export default function Navbar() {
         { label: "Weekly Updates", href: "/project/weekly-updates" },
       ],
     },
-    { label: "Literature Review", href: "/literature-review" },
+    {
+      label: "Literature Review",
+      href: "#",
+      dropdownItems: [
+        { label: "Shrabon Das", href: "/literature-review/shrabon-das" },
+        { label: "Nijum Barua", href: "/literature-review/nijum-barua" },
+        { label: "SM Mahadi Bhuiyan", href: "/literature-review/sm-mahadi-bhuiyan" },
+        { label: "Mohd Ashraful Islam", href: "/literature-review/mohd-ashraful-islam" },
+        { label: "Fahim Faisal", href: "/literature-review/fahim-faisal" },
+        { label: "Elora Sharmin Khan", href: "/literature-review/elora-sharmin-khan" },
+      ],
+    },
     { label: "Prototype", href: "/prototype" },
     { label: "Team", href: "/team" },
   ];
@@ -77,21 +88,21 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex md:items-center md:gap-x-1">
+            <div className="hidden md:flex md:items-center md:gap-x-1" ref={dropdownRef}>
               {navItems.map((item) => {
                 if (item.dropdownItems) {
+                  const isDropdownOpen = openDropdown === item.label;
                   return (
                     <div 
                       key={item.label} 
                       className="relative" 
-                      ref={dropdownRef}
-                      onMouseEnter={() => setIsProjectOpen(true)}
-                      onMouseLeave={() => setIsProjectOpen(false)}
+                      onMouseEnter={() => setOpenDropdown(item.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
                     >
                       <button
-                        onClick={() => setIsProjectOpen(!isProjectOpen)}
+                        onClick={() => setOpenDropdown(isDropdownOpen ? null : item.label)}
                         className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                          isProjectOpen
+                          isDropdownOpen
                             ? "bg-zinc-100/80 text-purple-600 dark:bg-zinc-800/80 dark:text-purple-400"
                             : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
                         }`}
@@ -99,7 +110,7 @@ export default function Navbar() {
                         {item.label}
                         <svg
                           className={`h-4 w-4 transition-transform duration-300 ${
-                            isProjectOpen ? "rotate-180 text-purple-500" : "text-zinc-400"
+                            isDropdownOpen ? "rotate-180 text-purple-500" : "text-zinc-400"
                           }`}
                           fill="none"
                           viewBox="0 0 24 24"
@@ -113,7 +124,7 @@ export default function Navbar() {
                       {/* Dropdown Panel */}
                       <div
                         className={`absolute left-0 mt-1 w-56 origin-top-left rounded-2xl border border-zinc-200/50 bg-white p-2 shadow-xl backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-900 transition-all duration-300 ${
-                          isProjectOpen
+                          isDropdownOpen
                             ? "visible scale-100 opacity-100 translate-y-0"
                             : "invisible scale-95 opacity-0 -translate-y-2 pointer-events-none"
                         }`}
@@ -155,7 +166,7 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Right Action Button (Optional: Let's do a stylish contact or interactive button) */}
+            {/* Right Action Button */}
             <div className="hidden md:flex md:items-center">
               <Link
                 href="/prototype"
@@ -202,7 +213,7 @@ export default function Navbar() {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Mobile Drawer (Side Navbar from the left or right - we'll do right side) */}
+      {/* Mobile Drawer */}
       <div
         className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm border-l border-zinc-200/50 bg-white p-6 shadow-2xl backdrop-blur-xl dark:border-zinc-850 dark:bg-zinc-950/95 transition-all duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -243,16 +254,17 @@ export default function Navbar() {
             <div className="space-y-2 py-6">
               {navItems.map((item) => {
                 if (item.dropdownItems) {
+                  const isMobileDropdownOpen = openMobileDropdown === item.label;
                   return (
                     <div key={item.label} className="space-y-1">
                       <button
-                        onClick={() => setIsMobileProjectOpen(!isMobileProjectOpen)}
+                        onClick={() => setOpenMobileDropdown(isMobileDropdownOpen ? null : item.label)}
                         className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-zinc-900 hover:bg-zinc-50 dark:text-zinc-100 dark:hover:bg-zinc-900 transition-colors duration-200"
                       >
                         <span>{item.label}</span>
                         <svg
                           className={`h-5 w-5 text-zinc-500 transition-transform duration-350 ${
-                            isMobileProjectOpen ? "rotate-180 text-purple-500" : ""
+                            isMobileDropdownOpen ? "rotate-180 text-purple-500" : ""
                           }`}
                           fill="none"
                           viewBox="0 0 24 24"
@@ -266,7 +278,7 @@ export default function Navbar() {
                       {/* Dropdown Items in Mobile Accordion */}
                       <div
                         className={`overflow-hidden transition-all duration-350 ease-in-out pl-4 ${
-                          isMobileProjectOpen ? "max-h-96 opacity-100 mt-1" : "max-h-0 opacity-0 pointer-events-none"
+                          isMobileDropdownOpen ? "max-h-96 opacity-100 mt-1" : "max-h-0 opacity-0 pointer-events-none"
                         }`}
                       >
                         <div className="border-l border-zinc-100 pl-4 py-1 space-y-1 dark:border-zinc-800">
