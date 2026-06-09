@@ -39,6 +39,7 @@ export default function Navbar() {
       label: "Project",
       href: "#",
       dropdownItems: [
+        { label: "Vision & Goals", href: "/project/vision-goals" },
         { label: "Methodology", href: "/project/methodology" },
         { label: "Survey Data", href: "/project/survey-data" },
         { label: "Results", href: "/project/results" },
@@ -61,6 +62,7 @@ export default function Navbar() {
     },
     { label: "Prototype", href: "/prototype" },
     { label: "Team", href: "/team" },
+    { label: "Robotics", href: "/robotics" },
   ];
 
   return (
@@ -123,31 +125,33 @@ export default function Navbar() {
 
                       {/* Dropdown Panel */}
                       <div
-                        className={`absolute left-0 mt-1 w-56 origin-top-left rounded-lg border border-green-500/30 bg-black p-2 shadow-2xl shadow-green-500/5 backdrop-blur-xl transition-all duration-300 ${
+                        className={`absolute left-0 top-full pt-2 w-56 origin-top-left transition-all duration-300 ${
                           isDropdownOpen
                             ? "visible scale-100 opacity-100 translate-y-0"
                             : "invisible scale-95 opacity-0 -translate-y-2 pointer-events-none"
                         }`}
                       >
-                        <div className="grid gap-1">
-                          {item.dropdownItems.map((subItem) => (
-                            <Link
-                              key={subItem.label}
-                              href={subItem.href}
-                              className="group flex items-center justify-between rounded-md px-3 py-2 text-xs font-mono text-zinc-400 transition-all hover:bg-green-500/10 hover:text-green-400"
-                            >
-                              <span>{subItem.label}</span>
-                              <svg
-                                className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
+                        <div className="rounded-lg border border-green-500/30 bg-black p-2 shadow-2xl shadow-green-500/5 backdrop-blur-xl">
+                          <div className="grid gap-1">
+                            {item.dropdownItems.map((subItem) => (
+                              <Link
+                                key={subItem.label}
+                                href={subItem.href}
+                                className="group flex items-center justify-between rounded-md px-3 py-2 text-xs font-mono text-zinc-400 transition-all hover:bg-green-500/10 hover:text-green-400"
                               >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          ))}
+                                <span>{subItem.label}</span>
+                                <svg
+                                  className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth={2}
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
