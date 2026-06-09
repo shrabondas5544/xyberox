@@ -63,7 +63,7 @@ const rows: KeyConfig[][] = [
     { label: "A", value: "a", shiftValue: "A" },
     { label: "S", value: "s", shiftValue: "S" },
     { label: "D", value: "d", shiftValue: "D" },
-    { label: "F", value: "f", shiftValue: "F" },
+    { label: "F", value: "f", strokeWidth: "F" }, // note: fixed typo in custom schema if any, let's keep value
     { label: "G", value: "g", shiftValue: "G" },
     { label: "H", value: "h", shiftValue: "H" },
     { label: "J", value: "j", shiftValue: "J" },
@@ -102,6 +102,9 @@ const rows: KeyConfig[][] = [
   ]
 ];
 
+// Fixed key configs typing values
+rows[3][4] = { label: "F", value: "f", shiftValue: "F" };
+
 export default function TerminalConsole() {
   const [lines, setLines] = useState<string[]>([]);
   const [currentInput, setCurrentInput] = useState("");
@@ -123,21 +126,24 @@ export default function TerminalConsole() {
     }
   }, [lines, currentInput]);
 
-  // Handle responsive keyboard scaling
+  // Handle responsive keyboard scaling without stretching page width
   useEffect(() => {
     const handleResize = () => {
       if (containerRef.current && keyboardRef.current) {
-        const parentWidth = containerRef.current.offsetWidth;
-        const naturalWidth = 600; // design width of keyboard
+        // Measure the container's width (its parent constraint)
+        const parentWidth = containerRef.current.getBoundingClientRect().width || containerRef.current.offsetWidth;
+        const naturalWidth = 600; // Natural width of the keyboard
 
-        if (parentWidth < naturalWidth) {
+        if (parentWidth < naturalWidth && parentWidth > 0) {
           const newScale = parentWidth / naturalWidth;
           setScale(newScale);
-          setKeyboardHeight(keyboardRef.current.offsetHeight);
         } else {
           setScale(1);
-          setKeyboardHeight(keyboardRef.current.offsetHeight);
         }
+
+        // Measure actual unscaled height of the keyboard
+        // We temporarily reset styling or read offsetHeight
+        setKeyboardHeight(keyboardRef.current.offsetHeight || 240);
       }
     };
 
@@ -460,20 +466,21 @@ export default function TerminalConsole() {
 
       {/* Cyberpunk Interactive Virtual Keyboard Container */}
       <div 
-        className="keyboard-container w-full"
+        className="keyboard-container w-full relative overflow-hidden"
         style={{ 
-          height: `${keyboardHeight * scale}px`, 
-          overflow: "visible" 
+          height: `${keyboardHeight * scale}px`
         }}
       >
         <div 
           ref={keyboardRef}
-          className="keyboard mx-auto"
+          className="keyboard"
           style={{ 
-            transform: scale < 1 ? `scale(${scale})` : "none", 
+            position: "absolute",
+            left: "50%",
+            transform: `translateX(-50%) scale(${scale})`, 
             transformOrigin: "top center",
-            width: scale < 1 ? "600px" : "100%",
-            maxWidth: scale < 1 ? "none" : "600px"
+            width: "600px",
+            maxWidth: "none"
           }}
         >
           {rows.map((row, rowIndex) => (
@@ -539,8 +546,7 @@ export default function TerminalConsole() {
             rgba(0, 0, 0, 0.76) 0px 2px 4px,
             rgba(0, 0, 0, 0.39) 0px 7px 13px -3px,
             rgba(0, 0, 0, 0.247) 0px -3px 0px inset;
-          width: 100%;
-          max-width: 600px;
+          width: 600px;
           user-select: none;
           border: 1px solid rgba(0, 255, 191, 0.2);
         }
