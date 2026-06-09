@@ -30,11 +30,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full dark antialiased`}
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 antialiased overflow-x-hidden">
-        {/* Star Background elements */}
-        <div className="stars-container">
-          <div id="stars"></div>
-          <div id="stars2"></div>
-          <div id="stars3"></div>
+        {/* Matrix Background elements */}
+        <div className="matrix-container">
+          {Array.from({ length: 5 }).map((_, pIdx) => (
+            <div key={pIdx} className="matrix-pattern">
+              {Array.from({ length: 40 }).map((_, cIdx) => (
+                <div key={cIdx} className="matrix-column"></div>
+              ))}
+            </div>
+          ))}
         </div>
 
         <Navbar />
