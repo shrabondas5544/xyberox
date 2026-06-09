@@ -2,8 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-// Import Nijum Barua's picture
+// Import Team pictures
 import nijumPic from "./Nijum baruya.png";
+import ashrafulPic from "./Ashraful.png";
+import fahimPic from "./Fahim.png";
 
 interface TeamMember {
   name: string;
@@ -337,6 +339,16 @@ export default function TeamPage() {
           <div className="space-y-16 sm:space-y-24">
             {teamMembers.map((member, index) => {
               const isLeft = index % 2 === 0;
+
+              // Check if member has a profile photo
+              let memberPic = null;
+              if (member.name === "Nijum Barua") {
+                memberPic = nijumPic;
+              } else if (member.name === "Mohd Ashraful Islam") {
+                memberPic = ashrafulPic;
+              } else if (member.name === "Fahim Faisal") {
+                memberPic = fahimPic;
+              }
               
               return (
                 <div
@@ -353,7 +365,7 @@ export default function TeamPage() {
                       
                       {/* Avatar frame */}
                       <div className="relative w-60 h-60 sm:w-64 sm:h-64 bg-black border border-green-500/30 rounded-sm overflow-hidden flex items-center justify-center">
-                        {member.name === "Nijum Barua" ? (
+                        {memberPic ? (
                           <div className="relative w-full h-full">
                             {/* Glowing back background effect */}
                             <div className="absolute -inset-2 bg-gradient-to-t from-green-500/20 via-green-500/10 to-green-500/0 blur-xl rounded-full" />
@@ -361,7 +373,7 @@ export default function TeamPage() {
 
                             {/* Cyberpunk glitching image */}
                             <Image 
-                              src={nijumPic}
+                              src={memberPic}
                               alt={member.name}
                               fill
                               sizes="(max-width: 640px) 240px, 256px"
