@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import botPic from "./BOT Picture.png";
 
 interface CoreValue {
   title: string;
@@ -81,6 +83,23 @@ export default function VisionGoalsClient() {
           <p className="mt-4 font-mono text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto leading-relaxed">
             Accessing core mission parameters, target operating models, and foundational principles for Project Aegis radio-silent edge computing.
           </p>
+
+          {/* BOT Picture Container with background glow (NO FRAME) */}
+          <div className="relative mt-8 max-w-md mx-auto">
+            {/* Background Light Glow */}
+            <div className="absolute inset-0 rounded-full bg-green-500/5 opacity-40 blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 rounded-full bg-emerald-500/5 opacity-20 blur-2xl animate-pulse pointer-events-none" />
+            
+            {/* The Image itself - completely borderless/frameless */}
+            <div className="relative overflow-hidden">
+              <Image
+                src={botPic}
+                alt="Aegis Tactical Bot Model"
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
+          </div>
         </div>
 
         {/* Mission & Vision Section */}

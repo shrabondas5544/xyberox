@@ -25,7 +25,8 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-base sm:text-lg font-mono text-zinc-400 leading-relaxed">
-          // ACCESSING DATABASE... Welcome to the official repository and documentation platform for the Xyberox autonomous systems initiative. Analyze our telemetry, review literature surveys, and inspect system methodologies.
+          // ACCESSING DATABASE...<br />
+          Welcome to the official repository and documentation platform for Xyberox, our edge-computed autonomous robotic platform. Dive into its system architecture, analyze real-time operational telemetry, and inspect the decentralized deep learning methodologies driving its navigation.
         </p>
 
         {/* Interactive Terminal Console */}

@@ -9,6 +9,7 @@ import fahimPic from "./Fahim.png";
 import shrabonPic from "./Shrabon_Das .png";
 import mahadiPic from "./mahadi_shakkhor .png";
 import eloraPic from "./Elora_Sharmin_Khan .png";
+import supervisorPic from "./Dr.webp";
 
 interface TeamMember {
   name: string;
@@ -249,10 +250,33 @@ export default function TeamPage() {
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-green-500/10 to-transparent pointer-events-none" />
 
             <div className="p-6 sm:p-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-              {/* Initials Avatar */}
-              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-sm bg-green-500 p-0.5 shadow-lg shadow-green-500/20">
-                <div className="flex h-full w-full items-center justify-center rounded-sm bg-black text-3xl font-mono font-black text-green-400">
-                  MS
+              {/* Supervisor Avatar */}
+              <div className="relative group shrink-0">
+                <div className="absolute -inset-1 rounded-sm bg-gradient-to-r from-green-500 to-emerald-500 opacity-15 blur-sm group-hover:opacity-45 transition duration-500" />
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 bg-black border border-green-500/30 rounded-sm overflow-hidden flex items-center justify-center shadow-lg shadow-green-500/10">
+                  <div className="relative w-full h-full">
+                    {/* Glowing back background effect */}
+                    <div className="absolute -inset-2 bg-gradient-to-t from-green-500/20 via-green-500/10 to-green-500/0 blur-xl rounded-full" />
+                    <div className="absolute -inset-1 bg-emerald-500/10 blur-md rounded-full animate-pulse" />
+
+                    <Image 
+                      src={supervisorPic}
+                      alt={supervisor.name}
+                      fill
+                      sizes="(max-width: 640px) 192px, 224px"
+                      className="object-cover animate-cyber-glitch"
+                      priority
+                    />
+
+                    {/* Faded vignette below */}
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none z-10" />
+                    
+                    {/* High-tech border overlays */}
+                    <div className="absolute top-2 left-2 border-t border-l border-green-500/50 w-3 h-3 z-20" />
+                    <div className="absolute top-2 right-2 border-t border-r border-green-500/50 w-3 h-3 z-20" />
+                    <div className="absolute bottom-2 left-2 border-b border-l border-green-500/50 w-3 h-3 z-20" />
+                    <div className="absolute bottom-2 right-2 border-b border-r border-green-500/50 w-3 h-3 z-20" />
+                  </div>
                 </div>
               </div>
 
