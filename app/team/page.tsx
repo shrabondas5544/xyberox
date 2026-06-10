@@ -511,6 +511,18 @@ export default function TeamPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5H4.5a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                           </svg>
                         </a>
+
+                        {/* Literature Survey Link */}
+                        <Link
+                          href={`/literature-review/${member.name.toLowerCase().replace(/\s+/g, "-")}`}
+                          className="ml-auto inline-flex items-center gap-1.5 rounded-sm border border-green-500/30 bg-green-500/5 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-green-400 hover:bg-green-500/20 hover:border-green-500 transition-all"
+                          title="View Literature Survey"
+                        >
+                          <span>[LIT_SURVEY]</span>
+                          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                          </svg>
+                        </Link>
                       </div>
                     </div>
                   </div>
