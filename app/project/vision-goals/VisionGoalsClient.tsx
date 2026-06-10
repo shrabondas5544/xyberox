@@ -156,7 +156,7 @@ export default function VisionGoalsClient() {
         </div>
 
         {/* 3D Cyber Cube Animation */}
-        <div className="flex flex-col items-center justify-center my-16 sm:my-24 min-h-[140px]">
+        <div className="flex flex-col items-center justify-center my-16 sm:my-24 min-h-[200px]">
           {isMounted ? (
             <div className="cube-container">
               <div className="cube">
@@ -187,7 +187,7 @@ export default function VisionGoalsClient() {
               </div>
             </div>
           ) : (
-            <div className="h-[120px] w-[120px] border border-green-500/10 bg-black/40 flex items-center justify-center animate-pulse">
+            <div className="h-[180px] w-[180px] border border-green-500/10 bg-black/40 flex items-center justify-center animate-pulse">
               <span className="font-mono text-[9px] text-green-500/30">GRID_INIT...</span>
             </div>
           )}
@@ -310,11 +310,10 @@ export default function VisionGoalsClient() {
       {/* Styled cube and slide transition rules */}
       <style>{`
         .cube-container {
-          width: 120px;
-          height: 120px;
+          width: 180px;
+          height: 180px;
           perspective: 800px;
           filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.45));
-          contain: layout paint;
         }
 
         .cube {
@@ -329,12 +328,14 @@ export default function VisionGoalsClient() {
 
         .face {
           position: absolute;
-          width: 120px;
-          height: 120px;
+          width: 100px;
+          height: 100px;
+          left: 40px;
+          top: 40px;
           color: #00ff41;
-          font-size: 26px;
+          font-size: 24px;
           font-weight: 900;
-          background: rgba(0, 8, 2, 0.7);
+          background: rgba(0, 8, 2, 0.75);
           border: 1.5px solid rgba(0, 255, 65, 0.7);
           display: flex;
           align-items: center;
@@ -346,27 +347,27 @@ export default function VisionGoalsClient() {
         }
 
         .front {
-          transform: translate3d(0, 0, 60px);
+          transform: translate3d(0, 0, 50px);
         }
 
         .back {
-          transform: rotateY(180deg) translate3d(0, 0, 60px);
+          transform: rotateY(180deg) translate3d(0, 0, 50px);
         }
 
         .right {
-          transform: rotateY(90deg) translate3d(0, 0, 60px);
+          transform: rotateY(90deg) translate3d(0, 0, 50px);
         }
 
         .left {
-          transform: rotateY(-90deg) translate3d(0, 0, 60px);
+          transform: rotateY(-90deg) translate3d(0, 0, 50px);
         }
 
         .top {
-          transform: rotateX(90deg) translate3d(0, 0, 60px);
+          transform: rotateX(90deg) translate3d(0, 0, 50px);
         }
 
         .bottom {
-          transform: rotateX(-90deg) translate3d(0, 0, 60px);
+          transform: rotateX(-90deg) translate3d(0, 0, 50px);
         }
 
         .cube-container:hover .cube {
