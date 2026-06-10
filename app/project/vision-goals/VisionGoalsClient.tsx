@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface CoreValue {
   title: string;
@@ -11,6 +11,11 @@ interface CoreValue {
 
 export default function VisionGoalsClient() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const coreValues: CoreValue[] = [
     {
@@ -150,9 +155,43 @@ export default function VisionGoalsClient() {
           </div>
         </div>
 
-        {/* Section Divider */}
-        <div className="flex flex-col items-center justify-center my-16 sm:my-20">
-          <div className="h-[1px] w-full max-w-4xl bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
+        {/* 3D Cyber Cube Animation */}
+        <div className="flex flex-col items-center justify-center my-16 sm:my-24 min-h-[140px]">
+          {isMounted ? (
+            <div className="cube-container">
+              <div className="cube">
+                <div className="face front">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="drop-shadow-[0_0_8px_rgba(34,197,94,0.7)]">X</span>
+                </div>
+                <div className="face back">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="drop-shadow-[0_0_8px_rgba(34,197,94,0.7)]">Y</span>
+                </div>
+                <div className="face right">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="drop-shadow-[0_0_8px_rgba(34,197,94,0.7)]">B</span>
+                </div>
+                <div className="face left">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="drop-shadow-[0_0_8px_rgba(34,197,94,0.7)]">E</span>
+                </div>
+                <div className="face top">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="text-[10px] tracking-wider drop-shadow-[0_0_6px_rgba(34,197,94,0.7)]">AEGIS</span>
+                </div>
+                <div className="face bottom">
+                  <div className="absolute inset-1 border border-green-500/10 pointer-events-none" />
+                  <span className="text-[10px] tracking-wider drop-shadow-[0_0_6px_rgba(34,197,94,0.7)]">CORE</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="h-[120px] w-[120px] border border-green-500/10 bg-black/40 flex items-center justify-center animate-pulse">
+              <span className="font-mono text-[9px] text-green-500/30">GRID_INIT...</span>
+            </div>
+          )}
+          <div className="h-[2px] w-28 bg-gradient-to-r from-transparent via-green-500/20 to-transparent mt-4 animate-pulse" />
         </div>
 
         {/* Core Values Section */}
@@ -268,6 +307,81 @@ export default function VisionGoalsClient() {
       </div>
 
 
+      {/* Styled cube and slide transition rules */}
+      <style>{`
+        .cube-container {
+          width: 120px;
+          height: 120px;
+          perspective: 800px;
+          filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.45));
+          contain: layout paint;
+        }
+
+        .cube {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          animation: rotate 18s infinite linear;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .face {
+          position: absolute;
+          width: 120px;
+          height: 120px;
+          color: #00ff41;
+          font-size: 26px;
+          font-weight: 900;
+          background: rgba(0, 8, 2, 0.7);
+          border: 1.5px solid rgba(0, 255, 65, 0.7);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-geist-mono), monospace;
+          user-select: none;
+          backface-visibility: hidden;
+          will-change: transform;
+        }
+
+        .front {
+          transform: translate3d(0, 0, 60px);
+        }
+
+        .back {
+          transform: rotateY(180deg) translate3d(0, 0, 60px);
+        }
+
+        .right {
+          transform: rotateY(90deg) translate3d(0, 0, 60px);
+        }
+
+        .left {
+          transform: rotateY(-90deg) translate3d(0, 0, 60px);
+        }
+
+        .top {
+          transform: rotateX(90deg) translate3d(0, 0, 60px);
+        }
+
+        .bottom {
+          transform: rotateX(-90deg) translate3d(0, 0, 60px);
+        }
+
+        .cube-container:hover .cube {
+          animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+          0% {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+          }
+          100% {
+            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }
