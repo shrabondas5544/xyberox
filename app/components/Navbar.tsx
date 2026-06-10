@@ -172,7 +172,7 @@ export default function Navbar() {
         ref={audioRef}
         src="https://archive.org/download/matrix-soundtrack-collection/Matrix%20Revolutions/1.Soundtrack/16.%20Navras%20(by%20Juno%20Reactor%20Vs.%20Don%20Davis).mp3"
         loop
-        preload="auto"
+        preload="none"
       />
       <nav className="sticky top-0 z-50 w-full border-b border-green-500/20 bg-black/80 backdrop-blur-md transition-colors duration-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

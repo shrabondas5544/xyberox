@@ -6,6 +6,9 @@ import Image from "next/image";
 import nijumPic from "./Nijum baruya.png";
 import ashrafulPic from "./Ashraful.png";
 import fahimPic from "./Fahim.png";
+import shrabonPic from "./Shrabon_Das .png";
+import mahadiPic from "./mahadi_shakkhor .png";
+import eloraPic from "./Elora_Sharmin_Khan .png";
 
 interface TeamMember {
   name: string;
@@ -348,6 +351,12 @@ export default function TeamPage() {
                 memberPic = ashrafulPic;
               } else if (member.name === "Fahim Faisal") {
                 memberPic = fahimPic;
+              } else if (member.name === "Shrabon Das") {
+                memberPic = shrabonPic;
+              } else if (member.name === "SM Mahadi Bhuiyan") {
+                memberPic = mahadiPic;
+              } else if (member.name === "Elora Sharmin Khan") {
+                memberPic = eloraPic;
               }
               
               return (
