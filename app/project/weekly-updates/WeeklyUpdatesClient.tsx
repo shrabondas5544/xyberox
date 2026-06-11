@@ -480,7 +480,7 @@ export default function WeeklyUpdatesClient() {
                 <h3 className="text-sm font-bold text-white uppercase tracking-wide">AEGIS_PROJECT_GANTT</h3>
               </div>
               <span className="font-mono text-[9px] text-green-400 bg-green-950/40 border border-green-500/20 px-2.5 py-1">
-                COMPLETED: 82%
+                COMPLETED: 27%
               </span>
             </div>
 

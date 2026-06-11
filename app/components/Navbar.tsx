@@ -163,7 +163,14 @@ export default function Navbar() {
     },
     { label: "Prototype", href: "/prototype" },
     { label: "Team", href: "/team" },
-    { label: "Robotics", href: "/robotics" },
+    {
+      label: "Others",
+      href: "#",
+      dropdownItems: [
+        { label: "Lecture Timeline", href: "/lecture-timeline" },
+        { label: "Robotics", href: "/robotics" },
+      ],
+    },
   ];
 
   return (
