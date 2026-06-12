@@ -13,7 +13,7 @@ interface ChartDataPoint {
 
 export default function SurveyDataClient() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [activeTab, setActiveTab] = useState<"all" | "security" | "features" | "utility" | "systems" | "environments" | "correlation">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "security" | "features" | "utility" | "systems" | "environments" | "correlation" | "disturbances" | "occupation">("all");
   const [hoveredSegment, setHoveredSegment] = useState<{ chartId: string; index: number; label: string; value: number; count: number } | null>(null);
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
 
@@ -84,6 +84,18 @@ export default function SurveyDataClient() {
     { xLabel: "Detection", yLabel: "Military", x: 360, y: 70, size: 28, overlap: 80, color: "#22c55e" },
     { xLabel: "Detection", yLabel: "Exam Hall", x: 360, y: 150, size: 34, overlap: 95, color: "#06b6d4" },
     { xLabel: "Detection", yLabel: "Hospital", x: 360, y: 230, size: 20, overlap: 50, color: "#f59e0b" },
+  ];
+
+  // 7. Q6: Disturbance Frequency (Dot Matrix/Waffle Chart) - mapped to 'q7'
+  const q6Data: ChartDataPoint[] = [
+    { label: "Occasionally", value: 53.8, count: 19, color: "#22c55e", glowColor: "rgba(34,197,94,0.4)" },
+    { label: "Frequently", value: 46.2, count: 17, color: "#06b6d4", glowColor: "rgba(6,182,212,0.4)" },
+  ];
+
+  // 8. Q7: Respondent Occupation (Radial Concentric Gauge Chart) - mapped to 'q8'
+  const q7Data: ChartDataPoint[] = [
+    { label: "Student", value: 53.8, count: 19, color: "#22c55e", glowColor: "rgba(34,197,94,0.4)" },
+    { label: "Engineer / IT Professional", value: 46.2, count: 17, color: "#06b6d4", glowColor: "rgba(6,182,212,0.4)" },
   ];
 
   // DONUT CHART CALCULATIONS (Circumference = 2 * PI * r)
@@ -189,7 +201,9 @@ export default function SurveyDataClient() {
             { id: "utility", label: "[Q3: COVERT DETECTION]" },
             { id: "systems", label: "[Q4: INFRASTRUCTURE TYPE]" },
             { id: "environments", label: "[Q5: TARGET ZONES]" },
-            { id: "correlation", label: "[SYS: PARAM CORRELATION]" }
+            { id: "correlation", label: "[SYS: PARAM CORRELATION]" },
+            { id: "disturbances", label: "[Q6: DISTURBANCE FREQ]" },
+            { id: "occupation", label: "[Q7: DEMOGRAPHICS]" }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -828,6 +842,194 @@ export default function SurveyDataClient() {
               </div>
             )}
 
+            {/* Q6: Disturbance Frequency (Cyber Waffle / Dot Matrix Chart) */}
+            {(activeTab === "all" || activeTab === "disturbances") && (
+              <div className="border border-green-500/20 bg-black/40 p-6 rounded-sm relative group hover:border-green-500/40 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-green-400" />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-green-400" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-green-400" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-green-400" />
+
+                <span className="text-[10px] text-green-500/40 block mb-2 font-semibold">Q6 // DISTURBANCE_FREQUENCY</span>
+                <h2 className="text-sm sm:text-base font-semibold text-zinc-100 mb-6 tracking-wide uppercase">
+                  Have you ever experienced situations where unauthorized mobile phone use caused disturbances?
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                  <div className="py-2">
+                    {/* 6x6 Waffle grid of 36 respondents */}
+                    <div className="grid grid-cols-6 gap-2.5 w-full max-w-[210px] mx-auto">
+                      {Array.from({ length: 36 }).map((_, i) => {
+                        const isFrequently = i < 17; // 46.2% of 36 is ~17
+                        const item = isFrequently ? q6Data[1] : q6Data[0];
+                        const isHovered = hoveredSegment?.chartId === "q7" && hoveredSegment?.index === i;
+                        return (
+                          <div
+                            key={i}
+                            className="aspect-square border rounded-xs relative cursor-pointer transition-all duration-200"
+                            style={{
+                              backgroundColor: isFrequently ? "rgba(6,182,212,0.15)" : "rgba(34,197,94,0.15)",
+                              borderColor: isHovered 
+                                ? (isFrequently ? "#06b6d4" : "#22c55e") 
+                                : (isFrequently ? "rgba(6,182,212,0.3)" : "rgba(34,197,94,0.3)"),
+                              boxShadow: isHovered 
+                                ? `0 0 10px ${isFrequently ? "#06b6d4" : "#22c55e"}` 
+                                : "none",
+                              transform: isHovered ? "scale(1.1)" : "scale(1)"
+                            }}
+                            onMouseEnter={() => {
+                              setHoveredSegment({
+                                chartId: "q7",
+                                index: i,
+                                label: `Respondent #${String(i + 1).padStart(2, "0")} (${item.label})`,
+                                value: item.value,
+                                count: item.count
+                              });
+                              addLog(`INSPECT: Q6 -> Resp #${i + 1} experienced disturbances [${item.label}]`);
+                            }}
+                            onMouseLeave={() => setHoveredSegment(null)}
+                          >
+                            <span className="absolute inset-0 flex items-center justify-center text-[7px] font-bold text-zinc-500">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    {q6Data.map((d, idx) => {
+                      const isHoveredCategory = hoveredSegment?.chartId === "q7" && 
+                        ((d.label === "Frequently" && hoveredSegment.index < 17) || 
+                         (d.label === "Occasionally" && hoveredSegment.index >= 17));
+
+                      return (
+                        <div
+                          key={d.label}
+                          className={`p-2.5 rounded-sm border transition-all duration-150 cursor-pointer ${
+                            isHoveredCategory
+                              ? "bg-green-500/5 border-green-500/40 shadow-[inset_0_0_8px_rgba(34,197,94,0.1)] translate-x-1"
+                              : "border-zinc-800 bg-zinc-950/20 hover:border-zinc-700"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="h-2.5 w-2.5 rounded-xs" style={{ backgroundColor: d.color, boxShadow: `0 0 6px ${d.color}` }} />
+                              <span className="text-xs font-semibold text-zinc-300">{d.label}</span>
+                            </div>
+                            <div className="text-right">
+                              <span className="text-xs font-bold text-zinc-100">{d.value}%</span>
+                              <span className="text-[9px] text-zinc-500 block">({d.count} Res)</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Q7: Occupation (Concentric Ring Chart) */}
+            {(activeTab === "all" || activeTab === "occupation") && (
+              <div className="border border-green-500/20 bg-black/40 p-6 rounded-sm relative group hover:border-green-500/40 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-green-400" />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-green-400" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-green-400" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-green-400" />
+
+                <span className="text-[10px] text-green-500/40 block mb-2 font-semibold">Q7 // DEMOGRAPHIC_SURVEY</span>
+                <h2 className="text-sm sm:text-base font-semibold text-zinc-100 mb-6 tracking-wide uppercase">
+                  What is your occupation?
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                  <div className="flex justify-center relative py-4">
+                    <svg width="180" height="180" viewBox="0 0 150 150" className="block transform -rotate-90">
+                      {/* Grid track rings */}
+                      <circle cx="75" cy="75" r="50" fill="none" stroke="#121214" strokeWidth="8" />
+                      <circle cx="75" cy="75" r="35" fill="none" stroke="#121214" strokeWidth="8" />
+
+                      {/* Outer ring (Student - 53.8%) */}
+                      <circle
+                        cx="75"
+                        cy="75"
+                        r="50"
+                        fill="none"
+                        stroke="#22c55e"
+                        strokeWidth={hoveredSegment?.chartId === "q8" && hoveredSegment?.index === 0 ? "11" : "8"}
+                        strokeLinecap="round"
+                        strokeDasharray={2 * Math.PI * 50}
+                        strokeDashoffset={isLoaded ? (2 * Math.PI * 50) * (1 - 0.538) : 2 * Math.PI * 50}
+                        className="transition-all duration-1000 ease-out cursor-pointer"
+                        onMouseEnter={() => {
+                          setHoveredSegment({ chartId: "q8", index: 0, label: "Student", value: 53.8, count: 19 });
+                          addLog("INSPECT: Q7 -> Student [53.8%]");
+                        }}
+                        onMouseLeave={() => setHoveredSegment(null)}
+                        style={{ filter: "drop-shadow(0 0 4px rgba(34,197,94,0.3))" }}
+                      />
+
+                      {/* Inner ring (Engineer / IT - 46.2%) */}
+                      <circle
+                        cx="75"
+                        cy="75"
+                        r="35"
+                        fill="none"
+                        stroke="#06b6d4"
+                        strokeWidth={hoveredSegment?.chartId === "q8" && hoveredSegment?.index === 1 ? "11" : "8"}
+                        strokeLinecap="round"
+                        strokeDasharray={2 * Math.PI * 35}
+                        strokeDashoffset={isLoaded ? (2 * Math.PI * 35) * (1 - 0.462) : 2 * Math.PI * 35}
+                        className="transition-all duration-1000 ease-out cursor-pointer"
+                        onMouseEnter={() => {
+                          setHoveredSegment({ chartId: "q8", index: 1, label: "Engineer / IT Professional", value: 46.2, count: 17 });
+                          addLog("INSPECT: Q7 -> Engineer / IT Professional [46.2%]");
+                        }}
+                        onMouseLeave={() => setHoveredSegment(null)}
+                        style={{ filter: "drop-shadow(0 0 4px rgba(6,182,212,0.3))" }}
+                      />
+                    </svg>
+
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                      <span className="text-[8px] text-zinc-500 uppercase tracking-widest">N = 36</span>
+                      <span className="text-xs text-green-400 font-bold mt-0.5">TARGETS</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    {q7Data.map((d, index) => {
+                      const isHovered = hoveredSegment?.chartId === "q8" && hoveredSegment?.index === index;
+                      return (
+                        <div
+                          key={d.label}
+                          onMouseEnter={() => setHoveredSegment({ chartId: "q8", index, label: d.label, value: d.value, count: d.count })}
+                          onMouseLeave={() => setHoveredSegment(null)}
+                          className={`p-2.5 rounded-sm border transition-all duration-150 cursor-pointer ${
+                            isHovered
+                              ? "bg-green-500/5 border-green-500/40 shadow-[inset_0_0_8px_rgba(34,197,94,0.1)] translate-x-1"
+                              : "border-zinc-800 bg-zinc-950/20 hover:border-zinc-700"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: d.color, boxShadow: `0 0 6px ${d.color}` }} />
+                              <span className="text-xs font-semibold text-zinc-300 truncate max-w-[130px]">{d.label}</span>
+                            </div>
+                            <div className="text-right">
+                              <span className="text-xs font-bold text-zinc-100">{d.value}%</span>
+                              <span className="text-[9px] text-zinc-500 block">({d.count} Res)</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
 
           {/* Right Column: Console Diagnostics & Summary Panel */}
@@ -870,6 +1072,8 @@ export default function SurveyDataClient() {
                     {hoveredSegment.chartId === "q4" && "Reflects substantial demand for flexible robotic systems over static base station setups."}
                     {hoveredSegment.chartId === "q5" && "Highlights that high-risk zones (Military, Exam rooms) take precedence for jamming devices."}
                     {hoveredSegment.chartId === "q6" && "Correlates environmental urgency with hardware subsystems for strategic product blueprints."}
+                    {hoveredSegment.chartId === "q7" && "Tracks individual user responses to examine unauthorized mobile phone disturbances."}
+                    {hoveredSegment.chartId === "q8" && "Categorizes respondent profiles, mapping robotics interests across developers and students."}
                   </div>
                 </div>
               ) : (
