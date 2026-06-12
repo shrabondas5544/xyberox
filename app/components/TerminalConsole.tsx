@@ -108,6 +108,13 @@ export default function TerminalConsole() {
   const [capsLock, setCapsLock] = useState(false);
   const [shiftActive, setShiftActive] = useState(false);
   const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
+  const [decryptGame, setDecryptGame] = useState<{
+    isActive: boolean;
+    word: string;
+    scrambled: string;
+    hint: string;
+    attempts: number;
+  } | null>(null);
 
   const [scale, setScale] = useState(1);
   const [keyboardHeight, setKeyboardHeight] = useState(240);
@@ -163,81 +170,326 @@ export default function TerminalConsole() {
       return;
     }
 
+    // Intercept input for Decryption Hacker game
+    if (decryptGame && decryptGame.isActive) {
+      const guess = trimmed.toLowerCase();
+      const target = decryptGame.word.toLowerCase();
+      
+      if (guess === target) {
+        setLines((prev) => [
+          ...prev,
+          commandLine,
+          `>> VERIFYING ACCESS CODE: [${trimmed.toUpperCase()}]...`,
+          ">> STATUS: ACCESS GRANTED. DECRYPTING DATA...",
+          "=========================================",
+          "CLASSIFIED DATA ENVELOPE [PROJECT AEGIS]:",
+          "  Rover Payload Frequency: 2.412 GHz - 2.472 GHz",
+          "  Signal Cancellation Type: Downlink DOS Jamming",
+          "  Navigation Engine: Edge-computed Deep Reinforcement Learning",
+          "  Hardware SoC: Jetson Nano Core + Custom RF Synthesizer",
+          "=========================================",
+          "GAME COMPLETED. SYSTEM SECURED."
+        ]);
+        setDecryptGame(null);
+      } else {
+        const nextAttempts = decryptGame.attempts - 1;
+        if (nextAttempts <= 0) {
+          setLines((prev) => [
+            ...prev,
+            commandLine,
+            `>> VERIFYING ACCESS CODE: [${trimmed.toUpperCase()}]...`,
+            ">> STATUS: DECRYPTION CRITICAL FAILURE. LOCKOUT TRIGGERED.",
+            "Type 'decrypt' to reboot decryption algorithm."
+          ]);
+          setDecryptGame(null);
+        } else {
+          setLines((prev) => [
+            ...prev,
+            commandLine,
+            `>> VERIFYING ACCESS CODE: [${trimmed.toUpperCase()}]...`,
+            `>> STATUS: INVALID CODE. ATTEMPTS REMAINING: ${nextAttempts}`,
+            `HINT: ${decryptGame.hint} (Scrambled: ${decryptGame.scrambled})`
+          ]);
+          setDecryptGame((curr) => curr ? { ...curr, attempts: nextAttempts } : null);
+        }
+      }
+      setCurrentInput("");
+      return;
+    }
+
     const parts = trimmed.split(" ");
     const cmd = parts[0].toLowerCase();
+    const normalizedInput = trimmed.toLowerCase();
     
     let output: string[] = [];
 
-    switch (cmd) {
-      case "help":
-        output = [
-          "Available Commands:",
-          "  help         Show list of available commands",
-          "  about        Display information about the Xyberox initiative",
-          "  skills       Display supervisor research focus area",
-          "  members      List team members",
-          "  matrix       Initialize cyberpunk neural uplink",
-          "  clear        Clear the terminal console screen",
-          "  sysinfo      Check hardware and software status telemetry"
-        ];
-        break;
-      case "about":
-        output = [
-          "XYBEROX SYSTEM PROTOCOL v4.9.0",
-          "--------------------------------",
-          "An autonomous robotics initiative specializing in Explainable AI (XAI),",
-          "human-robot interaction models, and decentralized robotics telemetry.",
-          "Supervised by Dr. Mohammad Shidujaman at IUB."
-        ];
-        break;
-      case "skills":
-        output = [
-          "Supervisor Core Research Focus:",
-          "  [1] Explainable Artificial Intelligence & Robotics",
-          "  [2] Human-Computer Interaction (HCI)",
-          "  [3] Human-Robot Interaction (HRI)"
-        ];
-        break;
-      case "members":
-        output = [
-          "Project Team Members:",
-          "  - Shrabon Das (Lead Dev & Research)",
-          "  - Nijum Barua",
-          "  - SM Mahadi Bhuiyan",
-          "  - Mohd Ashraful Islam",
-          "  - Fahim Faisal",
-          "  - Elora Sharmin Khan"
-        ];
-        break;
-      case "matrix":
-        output = [
-          "CONNECTING TO THE MATRIX NEURAL GRID...",
-          "  [████████████████████] 100% SECURE UPLINK",
-          "Uplink established. Look around you, the rain is everywhere."
-        ];
-        break;
-      case "clear":
-        setLines([]);
-        setCurrentInput("");
-        return;
-      case "sysinfo":
-        output = [
-          "HOST: xyberox-mainframe-iub",
-          "OS: CyberOS v3.8-NextJS",
-          "UPTIME: 3 hours, 22 minutes",
-          "KERNEL: Autonomous_Telemetry_Engine_v4.1",
-          "CPU: Quantum Core X-800 @ 5.4GHz",
-          "RAM: 64 GB HBM3 Holographic Memory",
-          "DISK: 1.2 PB Neuromorphic SSD",
-          "STATUS: ONLINE / OPTIMAL"
-        ];
-        break;
-      default:
-        output = [
-          `bash: command not found: ${cmd}`,
-          "Type 'help' to see list of valid commands."
-        ];
-        break;
+    // Team Member Search Queries
+    if (normalizedInput === "shrabon" || normalizedInput === "shrabon das" || normalizedInput === "das") {
+      output = [
+        "MEMBER FOUND: Shrabon Das [ID: 2121644]",
+        "----------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science & Engineering (CSE)",
+        "SEMESTER: 11th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Project Architecture",
+        "  - Frontend & UI Development",
+        "  - Control Interface Integration",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:shrabon.das@example.com",
+        "  - Github: github.com/shrabondas5544",
+        "  - Lit Survey: /literature-review/shrabon-das"
+      ];
+    } else if (normalizedInput === "nijum" || normalizedInput === "nijum barua" || normalizedInput === "barua") {
+      output = [
+        "MEMBER FOUND: Nijum Barua [ID: 2231066]",
+        "----------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science & Engineering (CSE)",
+        "SEMESTER: 12th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Hardware Implementation",
+        "  - Technical Documentation",
+        "  - Research Analysis",
+        "  - Algorithm Development",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:nijum@gmail.com",
+        "  - Github: github.com/NijumBarua",
+        "  - Lit Survey: /literature-review/nijum-barua"
+      ];
+    } else if (
+      normalizedInput === "mahadi" ||
+      normalizedInput === "sm mahadi bhuiyan" ||
+      normalizedInput === "mahadi bhuiyan" ||
+      normalizedInput === "bhuiyan" ||
+      normalizedInput === "sm mahadi"
+    ) {
+      output = [
+        "MEMBER FOUND: SM Mahadi Bhuiyan [ID: 2221486]",
+        "---------------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science & Engineering (CSE)",
+        "SEMESTER: 14th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Hardware Implementation",
+        "  - Research Analysis",
+        "  - Software Integration",
+        "  - Algorithm Development",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:smmahadi01910048684@gmail.com",
+        "  - Github: github.com/mahadi-shakkor",
+        "  - Lit Survey: /literature-review/sm-mahadi-bhuiyan"
+      ];
+    } else if (
+      normalizedInput === "ashraful" ||
+      normalizedInput === "mohd ashraful islam" ||
+      normalizedInput === "ashraful islam" ||
+      normalizedInput === "islam"
+    ) {
+      output = [
+        "MEMBER FOUND: Mohd Ashraful Islam [ID: 2010192]",
+        "-----------------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science (CS)",
+        "SEMESTER: 13th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Hardware Implementation",
+        "  - Technical Documentation",
+        "  - Research Analysis",
+        "  - Software Integration",
+        "  - Algorithm Development",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:ashrafulislamcsdev@gmail.com",
+        "  - Github: github.com/ashrafulcs",
+        "  - Lit Survey: /literature-review/mohd-ashraful-islam"
+      ];
+    } else if (normalizedInput === "fahim" || normalizedInput === "fahim faisal" || normalizedInput === "faisal") {
+      output = [
+        "MEMBER FOUND: Fahim Faisal [ID: 2221506]",
+        "----------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science & Engineering (CSE)",
+        "SEMESTER: 14th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Hardware Implementation",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:fahimfaisal1148@gmail.com",
+        "  - Github: github.com/Fahim396",
+        "  - Lit Survey: /literature-review/fahim-faisal"
+      ];
+    } else if (
+      normalizedInput === "elora" ||
+      normalizedInput === "elora sharmin khan" ||
+      normalizedInput === "elora sharmin" ||
+      normalizedInput === "khan"
+    ) {
+      output = [
+        "MEMBER FOUND: Elora Sharmin Khan [ID: 2231368]",
+        "-----------------------------------------------",
+        "PROGRAM: B.Sc. in Computer Science & Engineering (CSE)",
+        "SEMESTER: 12th Semester",
+        "ROLES / RESPONSIBILITIES:",
+        "  - Logistics Management",
+        "CONTACT / SOCIALS:",
+        "  - Email: mailto:elorakhan033@gmail.com",
+        "  - Github: github.com/elora5",
+        "  - Lit Survey: /literature-review/elora-sharmin-khan"
+      ];
+    } else if (
+      normalizedInput === "shidujaman" ||
+      normalizedInput === "mohammad shidujaman" ||
+      normalizedInput === "dr. mohammad shidujaman" ||
+      normalizedInput === "supervisor" ||
+      normalizedInput === "dr. shidujaman"
+    ) {
+      output = [
+        "SUPERVISOR FOUND: MOHAMMAD SHIDUJAMAN, PHD",
+        "------------------------------------------",
+        "ROLE: Project Supervisor",
+        "DEPARTMENT: Assistant Professor, Dept. of Computer Science & Engineering",
+        "INSTITUTION: Independent University Bangladesh",
+        "RESEARCH FOCUS FOCUS:",
+        "  - Explainable Artificial Intelligence and Robotics",
+        "  - Human Computer Interaction",
+        "  - Human Robot Interaction",
+        "CONTACT:",
+        "  - Email: shidujaman@iub.edu.bd"
+      ];
+    } else {
+      switch (cmd) {
+        case "help":
+          output = [
+            "Available Commands:",
+            "  help         Show list of available commands",
+            "  about        Display information about the Xyberox initiative",
+            "  skills       Display supervisor research focus area",
+            "  members      List team members",
+            "  aegis        Display ASCII mainframe specifications & stats",
+            "  scan         Execute active RF channel/radar scan",
+            "  decrypt      Initialize tactical telemetry decryption game",
+            "  matrix       Initialize cyberpunk neural uplink",
+            "  clear        Clear the terminal console screen",
+            "  sysinfo      Check hardware and software status telemetry"
+          ];
+          break;
+        case "about":
+          output = [
+            "XYBEROX SYSTEM PROTOCOL v4.9.0",
+            "--------------------------------",
+            "An autonomous robotics initiative specializing in Explainable AI (XAI),",
+            "human-robot interaction models, and decentralized robotics telemetry.",
+            "Supervised by Dr. Mohammad Shidujaman at IUB."
+          ];
+          break;
+        case "skills":
+          output = [
+            "Supervisor Core Research Focus:",
+            "  [1] Explainable Artificial Intelligence & Robotics",
+            "  [2] Human-Computer Interaction (HCI)",
+            "  [3] Human-Robot Interaction (HRI)"
+          ];
+          break;
+        case "members":
+          output = [
+            "Project Team Members:",
+            "  - Shrabon Das (Lead Dev & Research)",
+            "  - Nijum Barua",
+            "  - SM Mahadi Bhuiyan",
+            "  - Mohd Ashraful Islam",
+            "  - Fahim Faisal",
+            "  - Elora Sharmin Khan"
+          ];
+          break;
+        case "aegis":
+          output = [
+            "      __  __                      ",
+            "      \\ \\/ /_  ______  ___  _________",
+            "       \\  / / / / __ \\/ _ \\/ ___/ __ \\",
+            "       / / /_/ / /_/ /  __/ /  / /_/ /",
+            "      /_/\\__,_/_.___/\\___/_/   \\____/",
+            "      ---------------------------------",
+            "      HOST: xyberox-rover-mainframe",
+            "      UPLINK: SECURE WIRELESS (LoRa/868MHz)",
+            "      CORE_TEMP: 42.6°C // BATTERY: 87.2%",
+            "      ACTIVE_PAYLOADS: RF_JAMMER, CV_AVOIDANCE",
+            "      CURRENT_ZONE: IUB_LAB_SECTOR_4",
+            "      DRIVE_SYSTEM: 4WD Mecanum Suspension",
+            "      FIRMWARE: Aegis-RTOS-v4.1"
+          ];
+          break;
+        case "scan":
+          setLines((prev) => [...prev, commandLine, "Scanning active frequencies [2.4GHz / 5.8GHz / Sub-GHz]..."]);
+          setCurrentInput("");
+          setTimeout(() => {
+            setLines((prev) => [...prev, ">> SEARCH_BEACON: Sweeping channels... [ 22% ]"]);
+          }, 500);
+          setTimeout(() => {
+            setLines((prev) => [...prev, ">> ANALYZING: Demodulating signal peaks... [ 64% ]"]);
+          }, 1000);
+          setTimeout(() => {
+            setLines((prev) => [...prev, ">> COMPLETE: Decoding packet headers... [ 100% ]"]);
+          }, 1500);
+          setTimeout(() => {
+            setLines((prev) => [
+              ...prev,
+              "=========================================",
+              "TARGETS DETECTED IN ACTIVE SECTOR:",
+              "  [01] Wi-Fi Access Point (SSID: IUB-Guest)   -72dBm",
+              "  [02] Bluetooth Beacon (UUID: 8a4c)        -85dBm",
+              "  [03] Covert Jammer Core (Aegis-Rover-01)  -34dBm [STRONG]",
+              "========================================="
+            ]);
+          }, 2000);
+          return;
+        case "decrypt":
+          const words = [
+            { word: "AEGIS", scrambled: "SAGEI", hint: "The shield and code name of our edge computing payload." },
+            { word: "XYBEROX", scrambled: "REBOXXY", hint: "The name of our autonomous robotic platform." },
+            { word: "JAMMER", scrambled: "REMMJA", hint: "The service denial RF interference module." },
+            { word: "ROBOTICS", scrambled: "SITOBORC", hint: "The scientific discipline of designing and operating rovers." }
+          ];
+          const selected = words[Math.floor(Math.random() * words.length)];
+          setDecryptGame({
+            isActive: true,
+            word: selected.word,
+            scrambled: selected.scrambled,
+            hint: selected.hint,
+            attempts: 3
+          });
+          output = [
+            "INITIALIZING DECRYPTION ALGORITHM...",
+            "=========================================",
+            `SCRAMBLED VECTOR: [ ${selected.scrambled} ]`,
+            `HINT: ${selected.hint}`,
+            "=========================================",
+            "ENTER DECIPHERED KEY VALUE (3 ATTEMPTS REMAINING):"
+          ];
+          break;
+        case "matrix":
+          output = [
+            "CONNECTING TO THE MATRIX NEURAL GRID...",
+            "  [████████████████████] 100% SECURE UPLINK",
+            "Uplink established. Look around you, the rain is everywhere."
+          ];
+          break;
+        case "clear":
+          setLines([]);
+          setCurrentInput("");
+          return;
+        case "sysinfo":
+          output = [
+            "HOST: xyberox-mainframe-iub",
+            "OS: CyberOS v3.8-NextJS",
+            "UPTIME: 3 hours, 22 minutes",
+            "KERNEL: Autonomous_Telemetry_Engine_v4.1",
+            "CPU: Quantum Core X-800 @ 5.4GHz",
+            "RAM: 64 GB HBM3 Holographic Memory",
+            "DISK: 1.2 PB Neuromorphic SSD",
+            "STATUS: ONLINE / OPTIMAL"
+          ];
+          break;
+        default:
+          output = [
+            `bash: command not found: ${cmd}`,
+            "Type 'help' or enter a member name to view info."
+          ];
+          break;
+      }
     }
 
     setLines((prev) => [...prev, commandLine, ...output]);
