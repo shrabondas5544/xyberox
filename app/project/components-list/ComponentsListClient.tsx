@@ -3,6 +3,18 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import piZeroPic from "../../physical components/pi zero 2.png";
+import lm2596Pic from "../../physical components/lm2596.png";
+import microSdPic from "../../physical components/microsd.png";
+import otgCablePic from "../../physical components/otg-cable.png";
+import lcdDisplayPic from "../../physical components/lcd-display.png";
+import csiCablePic from "../../physical components/csi-cable.png";
+import max98357aPic from "../../physical components/max98357a.png";
+import speakerPic from "../../physical components/speaker.png";
+import chassisPic from "../../physical components/chassis.png";
+import ttMotorPic from "../../physical components/tt-motor.png";
+import ttMotorClipPic from "../../physical components/tt-motor-clip.png";
+import wheelPic from "../../physical components/wheel.png";
+import lipoBatteryPic from "../../physical components/lipo-battery.png";
 
 interface ComponentSpec {
   [key: string]: string;
@@ -144,6 +156,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "3.3V DC (Internal)",
       interface: "SDIO",
+      priceStatus: "1,600",
+      purchaseLink: "https://www.startech.com.bd/sandisk-ultra-32gb-100mbps-micro-sdhc-uhs-i-memory-card",
+      image: microSdPic,
       specs: {
         "Storage Capacity": "32GB / 64GB High-Endurance",
         "Speed Rating": "Class 10, UHS-I Speed Class 3 (U3)",
@@ -171,6 +186,9 @@ export default function ComponentsListClient() {
       quantity: "1 kit",
       voltage: "Passive",
       interface: "USB-A, HDMI Standard",
+      priceStatus: "190",
+      purchaseLink: "https://store.roboticsbd.com/cables-wire/4205-micro-usb-otg-adapter-cable-micro-b-male-to-usb-a-female-blue-robotics-bangladesh.html",
+      image: otgCablePic,
       specs: {
         "OTG Configuration": "ID pin grounded to enable USB Host mode on Pi Zero port",
         "OTG Connectors": "Micro-USB Male to standard USB Type-A Female",
@@ -192,6 +210,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "3.3V DC",
       interface: "SPI Bus",
+      priceStatus: "650",
+      purchaseLink: "https://store.roboticsbd.com/display/3293-ips-lcd-128-240240-rgb-round-display-gc9a01-robotics-bangladesh.html",
+      image: lcdDisplayPic,
       specs: {
         "Controller ID": "GalaxyCore GC9A01",
         "Resolution": "240 x 240 pixels (circular viewport)",
@@ -248,6 +269,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "Passive",
       interface: "FPC CSI 22-to-15 Pin",
+      priceStatus: "250",
+      purchaseLink: "https://store.roboticsbd.com/raspberry-pi/1156-raspberry-pi-zero-camera-adapter-robotics-bangladesh.html",
+      image: csiCablePic,
       specs: {
         "Connector End A": "22-pin gold-plated FPC, 0.5mm pitch (Raspberry Pi Zero width)",
         "Connector End B": "15-pin gold-plated FPC, 1.0mm pitch (Standard camera width)",
@@ -268,6 +292,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "5.0V DC",
       interface: "I2S Digital Audio",
+      priceStatus: "450",
+      purchaseLink: "https://store.roboticsbd.com/electronics-module/2919-max98357a-i2s-dac-class-d-mono-amplifier-module-robotics-bangladesh.html",
+      image: max98357aPic,
       specs: {
         "DAC Chipset": "Maxim Integrated MAX98357A",
         "Output Configuration": "Class D Filterless Mono Output",
@@ -299,6 +326,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "Amplifier driven",
       interface: "Analog Screw terminals",
+      priceStatus: "390",
+      purchaseLink: "https://store.roboticsbd.com/sound-sensor-robotics-bangladesh/2307-stereo-enclosed-speaker-3w-8-robotics-bangladesh.html",
+      image: speakerPic,
       specs: {
         "Power Rating": "3 Watts continuous nominal (5 Watts peak)",
         "Impedance": "8 Ohms ±15%",
@@ -321,6 +351,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "Passive",
       interface: "Mechanical Bolt pattern",
+      priceStatus: "1,350",
+      purchaseLink: "https://store.roboticsbd.com/robot-platform-chassis-Bangladesh/880-4wd-robotics-rover-diy-wooden-chassis-with-motors-wheels-robotics-bangladesh.html",
+      image: chassisPic,
       specs: {
         "Base Deck Material": "Laser-cut 3mm aircraft-grade Birch plywood",
         "Drive Type": "4-Wheel Drive skid-steer mechanical base",
@@ -341,6 +374,9 @@ export default function ComponentsListClient() {
       quantity: 4,
       voltage: "3.0V - 6.0V DC (Software capped)",
       interface: "PWM Drive output",
+      priceStatus: "150",
+      purchaseLink: "https://store.roboticsbd.com/motor/3014-6v-300-rpm-dc-gear-bo-motor-tt-dual-shaft-l-shaped-robotics-bangladesh.html",
+      image: ttMotorPic,
       specs: {
         "Gear Ratio": "1:48 reduction gear module",
         "No Load Speed": "170 RPM @ 4.8V nominal voltage",
@@ -363,6 +399,9 @@ export default function ComponentsListClient() {
       quantity: "1 set",
       voltage: "Passive",
       interface: "Mechanical clamp",
+      priceStatus: "75",
+      purchaseLink: "https://store.roboticsbd.com/robotics-parts/2756-tt-dc-gear-motor-mounting-bracket-robotics-bangladesh.html",
+      image: ttMotorClipPic,
       specs: {
         "Clip material": "Molded wooden bracket plates / Acrylic locks",
         "Bolts": "M3 x 30mm steel hex structural bolts",
@@ -381,6 +420,9 @@ export default function ComponentsListClient() {
       quantity: 4,
       voltage: "Passive",
       interface: "Double-Flat Axle Shaft",
+      priceStatus: "380",
+      purchaseLink: "https://store.roboticsbd.com/robotics-parts/3809-d80mm-silicone-wheel-for-tt-motor-single-robotics-bangladesh.html",
+      image: wheelPic,
       specs: {
         "Wheel Diameter": "65mm outer diameter",
         "Tire Width": "26mm contact patch width",
@@ -434,6 +476,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "11.1V Nominal (12.6V Max)",
       interface: "XT60 (Power) / JST-XH (Balance)",
+      priceStatus: "2,500",
+      purchaseLink: "https://store.roboticsbd.com/battery/930-lipo-battery-2200mah-111v-3s-robotics-bangladesh.html",
+      image: lipoBatteryPic,
       specs: {
         "Cell Config": "3 Cells in Series (3S1P configuration)",
         "Nominal Capacity": "2200 mAh (24.42 Watt-Hours energy)",
@@ -496,6 +541,9 @@ export default function ComponentsListClient() {
       quantity: 1,
       voltage: "Input: 11.1V | Output: 5.0V Regulated",
       interface: "Solder pads In/Out",
+      priceStatus: "99",
+      purchaseLink: "https://store.roboticsbd.com/power-module-adapter/1855-hw-411a-lm2596-dc-to-dc-buck-converter-step-down-module-power-supply-robotics-bangladesh.html",
+      image: lm2596Pic,
       specs: {
         "Step-Down IC": "LM2596S adjustable switching regulator",
         "Output Current": "2.0A continuous (3.0A max with heatsink mounted)",
