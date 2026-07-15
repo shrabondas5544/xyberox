@@ -17,10 +17,10 @@ export default function Home() {
         </div>
 
         {/* Hero Section */}
-        <h1 className="mt-8 max-w-3xl text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-mono uppercase leading-[1.1]">
-          AUTONOMOUS ROBOTICS <br />
+        <h1 className="mt-8 max-w-4xl text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-mono uppercase leading-[1.1]">
+          An Edge-AI Terrestrial rover <br />
           <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-lime-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(0,255,65,0.2)]">
-            PERFECTED_WITH_XYBEROX
+            with autonomous offline state recovery
           </span>
         </h1>
 
