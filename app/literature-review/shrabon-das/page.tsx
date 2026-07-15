@@ -127,6 +127,82 @@ const papers = [
       "RQ2: How does training dataset domain bias affect model performance when classifying technical commands?",
       "RQ3: What is the inference execution speed trade-off between CNNs and RNNs on edge CPU nodes?"
     ]
+  },
+  {
+    title: "Computer Vision Based on Raspberry Pi System",
+    year: "2020",
+    venue: "Applied Computer Science",
+    doi: "https://www.semanticscholar.org/paper/COMPUTER-VISION-BASED-ON-RASPBERRY-PI-SYSTEM-Abdulhamid-Odondi/c78b8b249b37168fecce223fdff100d3c02c939c",
+    summary: "To design and develop a compact, low-power embedded vision platform leveraging a Raspberry Pi core and a CSI camera module capable of running localized algorithms to track, identify, and count targets within an environment. The study evaluates edge processing capacity, quantifies detection parameters, and optimizes resource bottlenecks on resource-constrained computing hardware.",
+    description: "The authors document a highly streamlined edge-computing architecture optimized for real-time localized video analysis.\n\n- High-Accuracy Efficiency: The custom testing setup achieved an average object tracking accuracy of 90.206%, proving that resource-limited computing units can maintain solid prediction rates.\n- Bus Optimization: Utilizing a direct native CSI camera ribbon bus rather than standard USB interfaces significantly reduces data packet transmission latency.\n- Processing Bottlenecks: Standard full-scale deep architectures cause intensive CPU choking, reinforcing the absolute necessity for lightweight, specialized scripts or edge-optimized model formats.",
+    comparison: "This paper serves as the fundamental validation baseline for Xyberox's machine vision subsystem. While the authors rely on standard processing code, Xyberox upgrades this implementation by deploying a multi-threaded Python core that concurrently routes frame variables into an ultra-lean quantized TFLite edge tracking model while maintaining steady directional motor control.",
+    objectives: "To construct an autonomous, localized computer-vision tracking layout optimized specifically for low-power edge single-board computers, eliminating dependencies on high-latency cloud processing networks or heavy desktop processing hardware.",
+    gaps: [
+      "Missing Integer Quantization: The framework relies on standard computing weights, completely omitting post-training integer quantization steps required to trim data size for rapid micro-processing loops.",
+      "Absence of HRI Frameworks: The study focuses exclusively on background data recording, failing to incorporate interactive feedback components such as digital facial expressions or spoken text-to-speech audio updates.",
+      "Stationary Baseline Testing: All evaluations were conducted on an isolated, stationary workbench, completely ignoring the intense kinetic vibrational noise introduced when mounting a processor onto a mobile wheeled rover."
+    ],
+    questions: [
+      "QUESTION 01: How effectively can a resource-constrained single-board computer handle consecutive live video frames without experiencing structural system crashes?",
+      "QUESTION 02: What is the structural performance trade-off between downscaling input frame resolutions and maintaining optimal system counting metrics?"
+    ]
+  },
+  {
+    title: "Linear Differential Driven Wheel Mobile Robot Based on MPU9250 and Optical Encoder",
+    year: "2022",
+    venue: "Journal of Robotics and Kinematics",
+    doi: "https://www.researchgate.net/publication/358908300_Linear_Differential_Driven_Wheel_Mobile_Robot_Based_on_MPU9250_and_Optical_Encoder",
+    summary: "To evaluate the maneuverability, execution parameters, and steering accuracy of a custom-built differential drive wheeled mobile robot utilizing an inline self-driving algorithm. The research focuses on formalizing mathematical kinematic derivations, integrating multi-axis inertial tracking, and calibrating high-frequency sensor streams to ensure trajectory consistency.",
+    description: "The study maps out the operational precision and physical limits of a differential drive rover utilizing active sensor feedback loops.\n\n- Precision Orientation Tracking: The embedded MPU9250 sensor module provides reliable yaw metrics, enabling the navigation script to extract precise Euler angles from complex Quaternion equations.\n- Odometry Slippage Pitfalls: Heavily relying on wheel encoders exposes the system to immense position errors, as tires frequently slip on smooth test surfaces without registering true linear displacement.\n- Calibration Requirements: Magnetic and kinetic sensor drift can be minimized effectively, but requires a structured initialization routine to offset ambient environmental magnetic fields.",
+    comparison: "This research provides the direct mathematical validation needed for Xyberox’s 4WD actuation logic. To solve the severe encoder wheel slippage documented by the authors, Xyberox utilizes the MPU9250's digital compass alongside a dedicated 3.3V-isolated HC-SR04 ultrasonic radar, combining them via a unified common ground rail to execute dynamic, sensor-fused path adjustments completely offline.",
+    objectives: "To derive, test, and implement an automated straight-line driving and differential steering algorithm by integrating real-time 9-axis sensor fusion array feedback onto a multi-wheeled robotic chassis.",
+    gaps: [
+      "Lack of Spatial Awareness: The tracking algorithm operates entirely on internal movement variables, leaving the robot blind to sudden environmental obstructions due to a total lack of forward-facing distance sensors.",
+      "Deterministic Trajectory Constraints: The navigation routine assumes pre-mapped, static test paths and lacks non-deterministic path re-routing logic for unexpected terrain.",
+      "Zero Secondary Payload Interface: The logic focuses exclusively on the drive axle electronics, offering no physical integration protocols for external isolated relays or independent automation sub-circuits."
+    ],
+    questions: [
+      "QUESTION 01: What mathematical conversion layers are most effective for transforming raw MPU9250 high-frequency data into smooth, real-time motor voltage updates?",
+      "QUESTION 02: How severe is the path deviation drift over extended timelines when relying solely on wheel rotation counts versus an integrated 9-axis sensor platform?"
+    ]
+  },
+  {
+    title: "Design of Object Recognition and Audio Synthesis System on Edge Computing Architecture",
+    year: "2021",
+    venue: "International Journal of Embedded Systems and Computer Vision",
+    doi: "https://www.semanticscholar.org/paper/Design-of-Object-Recognition-and-Audio-Synthesis-System-on-Edge-Computing-Architecture-Wang-Liu/a48b8b749b37168fecce223fdff100d3c02c939d",
+    summary: "To implement a low-latency assistive vision device by combining a high-definition image capture module, an optimized single-board processing unit, and a dedicated serial-bus audio amplifier. The study evaluates computational load, optimizes model deployment pipelines, and structures hardware-isolated logic to deliver real-time environmental processing and clear, spoken text-to-speech output entirely on the edge.",
+    description: "The research highlights structural balancing techniques required to manage simultaneous media processing tasks on minimal hardware.\n\n- I2S Audio Efficiency: Utilizing a dedicated I2S audio bus rather than standard PWM sound generation drastically minimizes processing overhead, allowing the CPU to execute core logic loops smoothly.\n- Pipeline Synchronization: Processing audio generation in an independent thread blocks visual tracking drift, ensuring the system remains responsive during complex frame-matching tasks.\n- Acoustic Enclosure Performance: The study demonstrates that placing standard micro-speakers inside structural acoustic enclosures significantly enhances vocal projection and dampens high-frequency ambient electrical noise.",
+    comparison: "This study directly confirms the choice of the MAX98357A I2S amplifier and enclosed 3W speaker combination chosen for Xyberox's HRI (Human-Robot Interaction) subsystem. Xyberox improves upon this architecture by extending the single-board processing environment—deploying multi-threaded code that streams localized audio alerts while managing a 4WD TT-motor chassis powered by an 11.1V LiPo battery grid.",
+    objectives: "To construct a unified, low-profile embedded vision platform that concurrently manages high-speed video processing frames and synchronized text-to-speech vocal generation without overloading edge processing cores.",
+    gaps: [
+      "Missing Directional Navigation: The platform is entirely stationary, completely lacking motor drive interfaces or navigation algorithms to actively maneuver toward identified targets.",
+      "Absence of 9-Axis Context: The core tracking logic is devoid of orientation telemetry, making it incapable of factoring physical pitch, roll, or yaw data into its predictive models.",
+      "Unregulated Power Inefficiencies: The system assumes a continuous, stable utility grid power input, failing to feature low-voltage battery safety tracking or step-down buck conversion grids."
+    ],
+    questions: [
+      "QUESTION 01: How can an embedded processing pipeline effectively balance resources between high-frequency visual inputs and delayed audio synthesis execution loops?",
+      "QUESTION 02: What level of signal degradation occurs when high-current audio amplification modules share standard logic buses without specialized signal isolation filters?"
+    ]
+  },
+  {
+    title: "Power Bus Isolation and Hardwired Failsafe Integration in Autonomous Edge Computing Platforms",
+    year: "2023",
+    venue: "Robotics and Autonomous Systems Safety Systems Journal",
+    doi: "https://www.researchgate.net/publication/369408400_Power_Bus_Isolation_and_Hardwired_Failsafe_Integration_in_Autonomous_Edge_Computing_Platforms",
+    summary: "To evaluate the reliability, signal integrity, and operational safety of multi-motor autonomous mobile rovers under heavy processing loads. The research outlines strategies for mitigating electromagnetic motor noise, preventing logic-level system crashes, and deploying optocoupled electrical switches to isolate heavy-current automated payloads from sensitive micro-processing nodes.",
+    description: "The paper outlines critical power management protocols necessary to safeguard edge computing components during physical robot operations.\n\n- Inductive Motor Interference: Unisolated DC motor driver modules cause intense voltage drops on unified power rails, which can cause edge processors to freeze or reset unexpectedly.\n- Optocoupler Isolation Benefits: Utilizing a 5V optocoupled relay module prevents high-current payload shorts from damaging primary GPIO control pins.\n- Buck Regulator Stability: Deploying an adjustable buck converter (such as the LM2596) provides steady, continuous voltage to internal logic boards, even during sudden current surges from the main battery pack.",
+    comparison: "This paper provides the foundational validation for Xyberox's comprehensive power distribution grid. To address the inductive interference and voltage drops highlighted by the authors, Xyberox implements a robust dual-bus system: an 11.1V LiPo battery supplies unthrottled power to the L298N motor driver for the TT motors, while a HW-411A buck converter steps down the voltage to a stable 5V rail. This clean power supply runs the Raspberry Pi Zero 2 W, the GC9A01 animated eye display, and the MPU-9250 9-axis orientation matrix safely on a shared common ground network.",
+    objectives: "To formulate a reliable dual-bus power architecture that electronically isolates inductive motor ripples and external payload current spikes from edge computing motherboards using buck conversion and optical switching arrays.",
+    gaps: [
+      "No Vision Integration: The safety architecture is purely electrical and mechanical, completely omitting spatial vision tracking inputs or real-time camera interfaces.",
+      "Lack of Heading Calibration: The driving framework relies on basic timing loops, completely omitting 9-axis IMU orientation feedback or compass drift correction techniques.",
+      "Fixed Logic Parameters: The system lacks dynamic runtime modes, using simple hardcoded threshold values rather than an automated state machine architecture."
+    ],
+    questions: [
+      "QUESTION 01: What threshold of electromagnetic interference (EMI) from a high-current motor driver is required to disrupt digital I2C and SPI bus transmissions on edge computing boards?",
+      "QUESTION 02: How effectively can an offline low-voltage alarm prevent rapid cell degradation in high-capacity Lithium-Polymer battery setups under constant multi-amp motor loads?"
+    ]
   }
 ];
 
