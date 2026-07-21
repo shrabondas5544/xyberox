@@ -42,12 +42,53 @@ export default function Home() {
           >
             [EXPLORE_PROTOTYPE]
           </Link>
+          <a
+            href="/xyberox.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 items-center justify-center gap-2 rounded-sm border border-emerald-400/60 bg-emerald-950/30 px-8 font-mono text-xs font-bold tracking-widest text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all duration-300 hover:bg-emerald-500/20 hover:border-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+            [RESEARCH_PAPER_PDF]
+          </a>
           <Link
             href="/project/methodology"
             className="flex h-12 items-center justify-center rounded-sm border border-green-500/40 bg-black/60 px-8 font-mono text-xs font-bold tracking-widest text-green-400 transition-all duration-300 hover:bg-green-500/10 hover:border-green-500 hover:shadow-[0_0_12px_rgba(0,255,65,0.15)]"
           >
             [METHODOLOGY]
           </Link>
+        </div>
+
+        {/* Research Paper Feature Banner */}
+        <div className="mt-12 w-full max-w-4xl rounded-sm border border-emerald-500/30 bg-emerald-950/10 p-6 sm:p-8 backdrop-blur-md text-left relative overflow-hidden group shadow-[0_0_20px_rgba(16,185,129,0.08)]">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 rounded-sm border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-emerald-400">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                DOCUMENTATION // RESEARCH_PAPER
+              </div>
+              <h3 className="text-xl font-mono font-bold uppercase text-white tracking-wide">
+                Xyberox Autonomous Systems Research Paper
+              </h3>
+              <p className="font-mono text-xs text-zinc-400 max-w-xl leading-relaxed">
+                Access the complete published research document (xyberox.pdf) detailing system architecture, dual-bus power grid isolation, edge-AI computer vision, and offline state recovery.
+              </p>
+            </div>
+            <a
+              href="/xyberox.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex shrink-0 h-11 items-center gap-2 rounded-sm bg-emerald-500 px-6 font-mono text-xs font-bold tracking-widest text-black shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all duration-300 hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.7)]"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+              VIEW_PAPER [PDF]
+            </a>
+          </div>
         </div>
 
         {/* Cyberpunk Grid */}

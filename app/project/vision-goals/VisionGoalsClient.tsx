@@ -174,6 +174,126 @@ export default function VisionGoalsClient() {
           </div>
         </div>
 
+        {/* Problem vs Solution Section: Exam Integrity & Active Countermeasures */}
+        <div className="mx-auto max-w-6xl mb-24">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 rounded-sm border border-red-500/30 bg-red-950/20 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-red-400 mb-4 backdrop-blur-md">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+              CASE_STUDY: ACADEMIC_SECURITY_DEPLOYMENT
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold font-mono uppercase text-white tracking-wider">
+              // PROBLEM_&_XYBEROX_SOLUTION
+            </h2>
+            <p className="mt-3 font-mono text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+              Addressing unauthorized mobile phone cheating and cloud-AI exploitation (ChatGPT) in examination halls through autonomous localized RF jamming and vision-based proctoring.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* The Problem Card */}
+            <div className="group relative overflow-hidden rounded-sm border border-red-500/30 bg-black/80 p-6 sm:p-8 shadow-xl shadow-red-500/5 backdrop-blur-md transition-all duration-300 hover:border-red-500/60">
+              {/* Corner Tech Brackets */}
+              <div className="absolute top-2 left-2 border-t border-l border-red-500/40 w-3 h-3" />
+              <div className="absolute top-2 right-2 border-t border-r border-red-500/40 w-3 h-3" />
+              <div className="absolute bottom-2 left-2 border-b border-l border-red-500/40 w-3 h-3" />
+              <div className="absolute bottom-2 right-2 border-b border-r border-red-500/40 w-3 h-3" />
+              
+              {/* Scanning Red Indicator */}
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-500/40 to-transparent animate-[pulse_2s_infinite]" />
+
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-red-500/20">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-red-950/40 border border-red-500/40 text-red-400">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-red-400/60 uppercase tracking-widest">THREAT_VECTOR // 01</span>
+                    <h3 className="text-lg font-mono font-bold uppercase text-white tracking-wide">The Problem: Exam Cheating via AI</h3>
+                  </div>
+                </div>
+                <span className="font-mono text-[10px] text-red-400 bg-red-950/50 px-2 py-1 border border-red-500/30">5G_ACTIVE</span>
+              </div>
+
+              {/* Problem Image Container */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm border border-red-500/20 mb-6 bg-zinc-950">
+                <Image
+                  src="/cheating_problem.jpg"
+                  alt="Students cheating in exam using smartphones and cellular 5G AI tools"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-1 border border-red-500/40 font-mono text-[9px] text-red-400">
+                  // ALERT: CONVERT_MOBILE_USE_DETECTED
+                </div>
+              </div>
+
+              <div className="font-mono text-xs text-zinc-300 space-y-3">
+                <p className="text-red-400 font-semibold border-l-2 border-red-500/60 pl-3 leading-relaxed">
+                  Ubiquitous 5G/4G connectivity allows examinees to covertly access LLMs (ChatGPT, Claude) and instant search engines during assessments.
+                </p>
+                <p className="text-zinc-400 leading-relaxed text-[11px]">
+                  Traditional human invigilators cannot continuously monitor dozens of students simultaneously. Discreet smartphone placement under desks and shared signal networks render conventional proctoring vulnerable to widespread academic dishonesty.
+                </p>
+              </div>
+            </div>
+
+            {/* The Solution Card */}
+            <div className="group relative overflow-hidden rounded-sm border border-green-500/30 bg-black/80 p-6 sm:p-8 shadow-xl shadow-green-500/5 backdrop-blur-md transition-all duration-300 hover:border-green-500/60">
+              {/* Corner Tech Brackets */}
+              <div className="absolute top-2 left-2 border-t border-l border-green-500/40 w-3 h-3" />
+              <div className="absolute top-2 right-2 border-t border-r border-green-500/40 w-3 h-3" />
+              <div className="absolute bottom-2 left-2 border-b border-l border-green-500/40 w-3 h-3" />
+              <div className="absolute bottom-2 right-2 border-b border-r border-green-500/40 w-3 h-3" />
+              
+              {/* Scanning Green Indicator */}
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-green-500/40 to-transparent animate-[pulse_2s_infinite]" />
+
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-green-500/20">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-green-950/40 border border-green-500/40 text-green-400">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-green-400/60 uppercase tracking-widest">COUNTERMEASURE // 02</span>
+                    <h3 className="text-lg font-mono font-bold uppercase text-white tracking-wide">The Solution: Xyberox Autonomous Robot</h3>
+                  </div>
+                </div>
+                <span className="font-mono text-[10px] text-green-400 bg-green-950/50 px-2 py-1 border border-green-500/30">JAMMING_&_VISION</span>
+              </div>
+
+              {/* Solution Image Container */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-sm border border-green-500/20 mb-6 bg-zinc-950">
+                <Image
+                  src="/robot_solution.jpg"
+                  alt="Xyberox autonomous robot patrolling exam hall, jamming cellular network and performing camera monitoring"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-1 border border-green-500/40 font-mono text-[9px] text-green-400">
+                  // NETWORK ERROR ENFORCED: SIGNAL JAMMED
+                </div>
+              </div>
+
+              <div className="font-mono text-xs text-zinc-300 space-y-3">
+                <p className="text-green-400 font-semibold border-l-2 border-green-500/60 pl-3 leading-relaxed">
+                  Xyberox autonomously patrols examination rows, emitting localized RF disruption to sever mobile networks while scanning for contraband devices.
+                </p>
+                <p className="text-zinc-400 leading-relaxed text-[11px]">
+                  <strong className="text-white">1. Active RF Signal Disruption:</strong> Blocks cellular 5G/4G & WiFi connections, triggering immediate &quot;NETWORK ERROR&quot; screens and locking out ChatGPT/AI query tools.<br />
+                  <strong className="text-white">2. Localized Vision Proctoring:</strong> The onboard camera combined with local TFLite edge models autonomously tracks suspicious head movements and phone usage in real time.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 3D Cyber Cube Animation */}
         <div className="flex flex-col items-center justify-center my-16 sm:my-24 min-h-[200px]">
           {isMounted ? (
