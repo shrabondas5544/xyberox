@@ -124,13 +124,14 @@ export default function TeamPage() {
   const teamMembers: TeamMember[] = [
     {
       name: "Shrabon Das",
-      id: "2121644",
+      id: "2230827",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "11th Semester",
       responsibilities: [
         "Project Architecture",
         "Frontend & UI Development",
         "Control Interface Integration",
+        "AI Integration",
       ],
       linkedin: "https://linkedin.com/",
       github: "https://github.com/shrabondas5544",
@@ -139,14 +140,13 @@ export default function TeamPage() {
     },
     {
       name: "Nijum Barua",
-      id: "2231066",
+      id: "2231368",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "12th Semester",
       responsibilities: [
         "Hardware Implementation",
         "Technical Documentation",
         "Research Analysis",
-        "Algorithm Development",
       ],
       linkedin: "https://www.linkedin.com/in/nijum-barua-b7a159257",
       github: "https://github.com/NijumBarua",
@@ -159,10 +159,8 @@ export default function TeamPage() {
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "14th Semester",
       responsibilities: [
-        "Hardware Implementation",
         "Research Analysis",
-        "Software Integration",
-        "Algorithm Development",
+        "Mathematical Equation Research",
       ],
       linkedin: "https://www.linkedin.com/in/mahadi-shakkhor-334911275/",
       github: "https://github.com/mahadi-shakkor",
@@ -176,10 +174,9 @@ export default function TeamPage() {
       semester: "13th Semester",
       responsibilities: [
         "Hardware Implementation",
-        "Technical Documentation",
-        "Research Analysis",
         "Software Integration",
         "Algorithm Development",
+        "RAG Implementation",
       ],
       linkedin: "https://www.linkedin.com/in/ashraful-islam-6710203a7",
       github: "https://github.com/ashrafulcs",
@@ -193,6 +190,7 @@ export default function TeamPage() {
       semester: "14th Semester",
       responsibilities: [
         "Hardware Implementation",
+        "Technical Documentation",
       ],
       linkedin: "https://www.linkedin.com/in/fahim-faisal-b63419415/",
       github: "https://github.com/Fahim396",
@@ -205,7 +203,9 @@ export default function TeamPage() {
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "12th Semester",
       responsibilities: [
-        "Logistics Management",
+        "Hardware Implementation",
+        "Hardware Architecture Design",
+        "Web Architecture Analysis",
       ],
       linkedin: "https://www.linkedin.com/",
       github: "https://github.com/elora5",
@@ -385,7 +385,7 @@ export default function TeamPage() {
               
               return (
                 <div
-                  key={member.id}
+                  key={`${member.name.toLowerCase().replace(/\s+/g, "-")}-${member.id}-${index}`}
                   className={`flex flex-col ${
                     isLeft ? "md:flex-row" : "md:flex-row-reverse"
                   } items-center gap-8 md:gap-16 max-w-5xl mx-auto`}
