@@ -184,7 +184,7 @@ export default function TeamPage() {
       researchgate: "https://www.researchgate.net/profile/Mohd-Islam-16",
     },
     {
-      name: "Fahim Faisal",
+      name: "Fahim Awal Faisal",
       id: "2221506",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "14th Semester",

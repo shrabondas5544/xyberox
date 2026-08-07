@@ -22,6 +22,9 @@ interface MemberInfo {
   slug: string;
   badge: string;
   hasVideos?: boolean;
+  demoVideoUrl?: string;
+  presentationVideoUrl?: string;
+  videoHostName?: string;
 }
 
 const MEMBERS_DATA: Record<string, MemberInfo> = {
@@ -35,6 +38,11 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     slug: "shrabon-das",
     badge: "MEMBER 01",
     hasVideos: true,
+    videoHostName: "IUB SHAREPOINT STREAM VIDEO",
+    demoVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
+    presentationVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
   },
   "shrabon": {
     id: "2230827",
@@ -46,6 +54,11 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     slug: "shrabon-das",
     badge: "MEMBER 01",
     hasVideos: true,
+    videoHostName: "IUB SHAREPOINT STREAM VIDEO",
+    demoVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
+    presentationVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
   },
   "shrabon das": {
     id: "2230827",
@@ -57,17 +70,11 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     slug: "shrabon-das",
     badge: "MEMBER 01",
     hasVideos: true,
-  },
-  "member-1": {
-    id: "2230827",
-    name: "Shrabon Das",
-    role: "Project Architecture & AI Integration",
-    program: "B.Sc. in Computer Science & Engineering (CSE)",
-    semester: "11th Semester",
-    image: shrabonPic,
-    slug: "shrabon-das",
-    badge: "MEMBER 01",
-    hasVideos: true,
+    videoHostName: "IUB SHAREPOINT STREAM VIDEO",
+    demoVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
+    presentationVideoUrl:
+      "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D",
   },
 
   "nijum-barua": {
@@ -82,17 +89,6 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     hasVideos: false,
   },
   "nijum": {
-    id: "2231368",
-    name: "Nijum Barua",
-    role: "Technical Documentation & Research Analysis",
-    program: "B.Sc. in Computer Science & Engineering (CSE)",
-    semester: "12th Semester",
-    image: nijumPic,
-    slug: "nijum-barua",
-    badge: "MEMBER 02",
-    hasVideos: false,
-  },
-  "member-2": {
     id: "2231368",
     name: "Nijum Barua",
     role: "Technical Documentation & Research Analysis",
@@ -126,17 +122,6 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     badge: "MEMBER 03",
     hasVideos: false,
   },
-  "member-3": {
-    id: "2221486",
-    name: "SM Mahadi Bhuiyan",
-    role: "Research Analysis & Mathematical Research",
-    program: "B.Sc. in Computer Science & Engineering (CSE)",
-    semester: "14th Semester",
-    image: mahadiPic,
-    slug: "sm-mahadi-bhuiyan",
-    badge: "MEMBER 03",
-    hasVideos: false,
-  },
 
   "mohd-ashraful-islam": {
     id: "2010192",
@@ -160,50 +145,48 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     badge: "MEMBER 04",
     hasVideos: false,
   },
-  "member-4": {
-    id: "2010192",
-    name: "Mohd Ashraful Islam",
-    role: "Software Integration & RAG Implementation",
-    program: "B.Sc. in Computer Science (CS)",
-    semester: "13th Semester",
-    image: ashrafulPic,
-    slug: "mohd-ashraful-islam",
-    badge: "MEMBER 04",
-    hasVideos: false,
-  },
 
-  "fahim-faisal": {
+  "fahim-awal-faisal": {
     id: "2221506",
-    name: "Fahim Faisal",
+    name: "Fahim Awal Faisal",
     role: "Hardware Implementation & Documentation",
     program: "B.Sc. in Computer Science & Engineering (CSE)",
     semester: "14th Semester",
     image: fahimPic,
-    slug: "fahim-faisal",
+    slug: "fahim-awal-faisal",
     badge: "MEMBER 05",
-    hasVideos: false,
+    hasVideos: true,
+    videoHostName: "GOOGLE DRIVE VIDEO STREAM",
+    demoVideoUrl: "https://drive.google.com/file/d/1S2kB5PFyzN5hLaIHlx_pmLkmN492XIY3/view",
+    presentationVideoUrl: "https://drive.google.com/file/d/1FtwXryYedKYIATx6aACmi5RLFTAlpCDh/view",
+  },
+  "fahim-faisal": {
+    id: "2221506",
+    name: "Fahim Awal Faisal",
+    role: "Hardware Implementation & Documentation",
+    program: "B.Sc. in Computer Science & Engineering (CSE)",
+    semester: "14th Semester",
+    image: fahimPic,
+    slug: "fahim-awal-faisal",
+    badge: "MEMBER 05",
+    hasVideos: true,
+    videoHostName: "GOOGLE DRIVE VIDEO STREAM",
+    demoVideoUrl: "https://drive.google.com/file/d/1S2kB5PFyzN5hLaIHlx_pmLkmN492XIY3/view",
+    presentationVideoUrl: "https://drive.google.com/file/d/1FtwXryYedKYIATx6aACmi5RLFTAlpCDh/view",
   },
   "fahim": {
     id: "2221506",
-    name: "Fahim Faisal",
+    name: "Fahim Awal Faisal",
     role: "Hardware Implementation & Documentation",
     program: "B.Sc. in Computer Science & Engineering (CSE)",
     semester: "14th Semester",
     image: fahimPic,
-    slug: "fahim-faisal",
+    slug: "fahim-awal-faisal",
     badge: "MEMBER 05",
-    hasVideos: false,
-  },
-  "member-5": {
-    id: "2221506",
-    name: "Fahim Faisal",
-    role: "Hardware Implementation & Documentation",
-    program: "B.Sc. in Computer Science & Engineering (CSE)",
-    semester: "14th Semester",
-    image: fahimPic,
-    slug: "fahim-faisal",
-    badge: "MEMBER 05",
-    hasVideos: false,
+    hasVideos: true,
+    videoHostName: "GOOGLE DRIVE VIDEO STREAM",
+    demoVideoUrl: "https://drive.google.com/file/d/1S2kB5PFyzN5hLaIHlx_pmLkmN492XIY3/view",
+    presentationVideoUrl: "https://drive.google.com/file/d/1FtwXryYedKYIATx6aACmi5RLFTAlpCDh/view",
   },
 
   "elora-sharmin-khan": {
@@ -218,17 +201,6 @@ const MEMBERS_DATA: Record<string, MemberInfo> = {
     hasVideos: false,
   },
   "elora": {
-    id: "2231368",
-    name: "Elora Sharmin Khan",
-    role: "Hardware Architecture & Web Analysis",
-    program: "B.Sc. in Computer Science & Engineering (CSE)",
-    semester: "12th Semester",
-    image: eloraPic,
-    slug: "elora-sharmin-khan",
-    badge: "MEMBER 06",
-    hasVideos: false,
-  },
-  "member-6": {
     id: "2231368",
     name: "Elora Sharmin Khan",
     role: "Hardware Architecture & Web Analysis",
@@ -258,14 +230,8 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
   const [copiedIEEE, setCopiedIEEE] = useState(false);
   const [copiedSpringer, setCopiedSpringer] = useState(false);
 
-  const videoDemoUrl =
-    "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
-
-  const videoPresentationUrl =
-    "https://iubedubd-my.sharepoint.com/:v:/g/personal/2230827_iub_edu_bd/IQAGVih1RxMbQ4I3roo-iNQsARAtyt4qscA70kV_zFyvh_A?e=Y1hsDj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
-
   const ieeeBibtex = `@ARTICLE{das2026xyberox,
-  author={Das, Shrabon and Barua, Nijum and Islam, Mohd Ashraful and Bhuiyan, S M Mahadi and Faisal, Fahim and Khan, Elora Sharmin},
+  author={Das, Shrabon and Barua, Nijum and Islam, Mohd Ashraful and Bhuiyan, S M Mahadi and Faisal, Fahim Awal and Khan, Elora Sharmin},
   journal={IEEE Transactions on Robotics / IEEE Access}, 
   title={Xyberox: An Edge Computing Autonomous Ground Vehicle Utilizing Low-Power Multi-Threaded Machine Vision and Dynamic Sensor Fusion for Real-Time Threat Mitigation}, 
   year={2026},
@@ -274,7 +240,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
 }`;
 
   const springerBibtex = `@INCOLLECTION{das2026xyberox_springer,
-  author={Das, Shrabon and Barua, Nijum and Islam, Mohd Ashraful and Bhuiyan, S M Mahadi and Faisal, Fahim and Khan, Elora Sharmin},
+  author={Das, Shrabon and Barua, Nijum and Islam, Mohd Ashraful and Bhuiyan, S M Mahadi and Faisal, Fahim Awal and Khan, Elora Sharmin},
   title={Multi-Threaded Edge Vision and Hardware-Isolated Power Architecture for Autonomous Mobile Platforms},
   booktitle={Lecture Notes in Computer Science (LNCS): Embedded Systems & Robotics},
   publisher={Springer Nature},
@@ -326,7 +292,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
               <option value="nijum-barua">Member 02: Nijum Barua (IEEE Paper)</option>
               <option value="sm-mahadi-bhuiyan">Member 03: SM Mahadi Bhuiyan (IEEE Paper)</option>
               <option value="mohd-ashraful-islam">Member 04: Mohd Ashraful Islam (IEEE Paper)</option>
-              <option value="fahim-faisal">Member 05: Fahim Faisal (IEEE Paper)</option>
+              <option value="fahim-awal-faisal">Member 05: Fahim Awal Faisal (Videos & IEEE)</option>
               <option value="elora-sharmin-khan">Member 06: Elora Sharmin Khan (IEEE Paper)</option>
             </select>
           </div>
@@ -459,18 +425,18 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                   </p>
                 </div>
                 <span className="text-[10px] text-green-400 bg-green-950/30 border border-green-500/30 px-2.5 py-1 rounded-xs">
-                  {member.hasVideos ? "IUB SHAREPOINT STREAM VIDEO" : "MEMBER SPECIFIC SUBMISSION"}
+                  {member.videoHostName || "MEMBER SPECIFIC SUBMISSION"}
                 </span>
               </div>
 
               {/* Video Player Display Container */}
               <div className="relative rounded-sm border border-green-500/40 bg-zinc-950 overflow-hidden shadow-2xl">
                 <div className="aspect-video w-full bg-black relative flex flex-col items-center justify-center p-6 text-center">
-                  {member.hasVideos ? (
+                  {member.hasVideos && member.demoVideoUrl ? (
                     <div className="max-w-xl space-y-4">
                       <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-950/40 px-3 py-1 text-xs text-green-400">
                         <span className="h-2 w-2 rounded-full bg-green-400 animate-ping" />
-                        <span>OFFICIAL SHAREPOINT VIDEO STREAM (SHRABON DAS)</span>
+                        <span>{member.videoHostName} ({member.name.toUpperCase()})</span>
                       </div>
 
                       <h3 className="text-lg sm:text-2xl font-bold text-white">
@@ -481,7 +447,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                       </p>
 
                       <a
-                        href={videoDemoUrl}
+                        href={member.demoVideoUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-black font-extrabold text-xs sm:text-sm rounded-sm hover:bg-green-400 transition-all shadow-[0_0_20px_rgba(34,197,94,0.4)]"
@@ -489,7 +455,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
-                        <span>WATCH VIDEO DEMONSTRATION ON SHAREPOINT</span>
+                        <span>WATCH VIDEO DEMONSTRATION STREAM</span>
                       </a>
                     </div>
                   ) : (
@@ -503,35 +469,43 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                         Video Demonstration - {member.name}
                       </h3>
                       <p className="text-xs text-zinc-400 leading-relaxed">
-                        Demonstration video stream link is specific to {member.name}. (The primary video demonstration stream above belongs to Shrabon Das). The shared IEEE Report below is identical across all members.
+                        Demonstration video stream links are available for Shrabon Das and Fahim Awal Faisal. The shared IEEE Report below is identical across all members.
                       </p>
 
                       <div className="p-4 bg-green-950/20 border border-green-500/30 rounded-sm text-left text-xs text-zinc-300">
-                        <p className="font-bold text-green-400 mb-1">Looking for Shrabon Das's Demonstration Video?</p>
-                        <p className="text-zinc-400 text-[11px] mb-3">You can view the full demonstration stream on Shrabon Das's portfolio page.</p>
-                        <Link
-                          href="/project/results/shrabon-das"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
-                        >
-                          <span>GO TO SHRABON DAS VIDEO DEMO ↗</span>
-                        </Link>
+                        <p className="font-bold text-green-400 mb-1">Looking for Available Demonstration Videos?</p>
+                        <p className="text-zinc-400 text-[11px] mb-3">You can view live video demonstration streams on Shrabon Das or Fahim Awal Faisal's portfolio pages.</p>
+                        <div className="flex gap-2">
+                          <Link
+                            href="/project/results/shrabon-das"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
+                          >
+                            <span>SHRABON DAS DEMO ↗</span>
+                          </Link>
+                          <Link
+                            href="/project/results/fahim-awal-faisal"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
+                          >
+                            <span>FAHIM AWAL FAISAL DEMO ↗</span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                {member.hasVideos && (
+                {member.hasVideos && member.demoVideoUrl && (
                   <div className="p-4 bg-green-950/20 border-t border-green-500/20 flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <h4 className="text-xs font-bold text-white">
-                        Video Demonstration (Shrabon Das & Xyberox Team)
+                        Video Demonstration ({member.name})
                       </h4>
                       <p className="text-[10px] text-zinc-400 mt-0.5">
-                        Stream Host: Independent University Bangladesh (IUB SharePoint Cloud)
+                        Stream Host: {member.videoHostName}
                       </p>
                     </div>
                     <a
-                      href={videoDemoUrl}
+                      href={member.demoVideoUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="text-xs text-green-400 underline font-bold hover:text-green-300"
@@ -561,18 +535,18 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                   </p>
                 </div>
                 <span className="text-[10px] text-green-400 bg-green-950/30 border border-green-500/30 px-2.5 py-1 rounded-xs">
-                  {member.hasVideos ? "IUB SHAREPOINT DEFENSE STREAM" : "MEMBER SPECIFIC SUBMISSION"}
+                  {member.videoHostName || "MEMBER SPECIFIC SUBMISSION"}
                 </span>
               </div>
 
               {/* Presentation Container */}
               <div className="relative rounded-sm border border-green-500/40 bg-zinc-950 overflow-hidden shadow-2xl">
                 <div className="aspect-video w-full bg-black relative flex flex-col items-center justify-center p-6 text-center">
-                  {member.hasVideos ? (
+                  {member.hasVideos && member.presentationVideoUrl ? (
                     <div className="max-w-xl space-y-4">
                       <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-950/40 px-3 py-1 text-xs text-green-400">
                         <span className="h-2 w-2 rounded-full bg-green-400 animate-ping" />
-                        <span>PRESENTATION DEFENSE RECORDING (SHRABON DAS)</span>
+                        <span>{member.videoHostName} ({member.name.toUpperCase()})</span>
                       </div>
 
                       <h3 className="text-lg sm:text-2xl font-bold text-white">
@@ -583,7 +557,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                       </p>
 
                       <a
-                        href={videoPresentationUrl}
+                        href={member.presentationVideoUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-black font-extrabold text-xs sm:text-sm rounded-sm hover:bg-green-400 transition-all shadow-[0_0_20px_rgba(34,197,94,0.4)]"
@@ -591,7 +565,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
-                        <span>WATCH VIDEO PRESENTATION ON SHAREPOINT</span>
+                        <span>WATCH VIDEO PRESENTATION STREAM</span>
                       </a>
                     </div>
                   ) : (
@@ -605,18 +579,26 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                         Video Presentation - {member.name}
                       </h3>
                       <p className="text-xs text-zinc-400 leading-relaxed">
-                        Presentation video link is specific to {member.name}. (The defense presentation video stream above belongs to Shrabon Das). The shared IEEE Report below is identical across all members.
+                        Presentation video stream links are available for Shrabon Das and Fahim Awal Faisal. The shared IEEE Report below is identical across all members.
                       </p>
 
                       <div className="p-4 bg-green-950/20 border border-green-500/30 rounded-sm text-left text-xs text-zinc-300">
-                        <p className="font-bold text-green-400 mb-1">Looking for Shrabon Das's Video Presentation?</p>
-                        <p className="text-zinc-400 text-[11px] mb-3">You can view the full presentation video on Shrabon Das's portfolio page.</p>
-                        <Link
-                          href="/project/results/shrabon-das"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
-                        >
-                          <span>GO TO SHRABON DAS VIDEO PRESENTATION ↗</span>
-                        </Link>
+                        <p className="font-bold text-green-400 mb-1">Looking for Available Video Presentations?</p>
+                        <p className="text-zinc-400 text-[11px] mb-3">You can view full presentation video streams on Shrabon Das or Fahim Awal Faisal's portfolio pages.</p>
+                        <div className="flex gap-2">
+                          <Link
+                            href="/project/results/shrabon-das"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
+                          >
+                            <span>SHRABON DAS PRESENTATION ↗</span>
+                          </Link>
+                          <Link
+                            href="/project/results/fahim-awal-faisal"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 text-black text-xs font-bold rounded-xs hover:bg-green-400 transition-all"
+                          >
+                            <span>FAHIM AWAL FAISAL PRESENTATION ↗</span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -727,7 +709,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                           <p className="text-[10px] text-zinc-600">Independent University, Bangladesh</p>
                         </div>
                         <div>
-                          <p className="font-bold">Fahim Faisal</p>
+                          <p className="font-bold">Fahim Awal Faisal</p>
                           <p className="text-[10px] text-zinc-600">Dept. of Computer Science & Eng.</p>
                           <p className="text-[10px] text-zinc-600">Independent University, Bangladesh</p>
                         </div>
@@ -1068,7 +1050,7 @@ export default function MemberResultsClient({ memberSlug }: { memberSlug: string
                 </h3>
 
                 <p className="text-xs text-emerald-400 font-medium mt-2">
-                  Authors: Shrabon Das, Nijum Barua, Mohd Ashraful Islam, S M Mahadi Bhuiyan, Fahim Faisal, Elora Sharmin Khan
+                  Authors: Shrabon Das, Nijum Barua, Mohd Ashraful Islam, S M Mahadi Bhuiyan, Fahim Awal Faisal, Elora Sharmin Khan
                 </p>
 
                 <div className="mt-4 bg-black/80 border border-emerald-500/20 p-4 rounded-sm">
