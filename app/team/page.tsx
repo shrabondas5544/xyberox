@@ -5,7 +5,7 @@ import Image from "next/image";
 // Import Team pictures
 import nijumPic from "./Nijum baruya.png";
 import ashrafulPic from "./Ashraful.png";
-import fahimPic from "./Fahim.png";
+import fahimPic from "./Fahim_Awal_Faisal.png";
 import shrabonPic from "./Shrabon_Das .png";
 import mahadiPic from "./mahadi_shakkhor .png";
 import eloraPic from "./Elora_Sharmin_Khan .png";
@@ -373,7 +373,7 @@ export default function TeamPage() {
                 memberPic = nijumPic;
               } else if (member.name === "Mohd Ashraful Islam") {
                 memberPic = ashrafulPic;
-              } else if (member.name === "Fahim Faisal") {
+              } else if (member.name.includes("Fahim")) {
                 memberPic = fahimPic;
               } else if (member.name === "Shrabon Das") {
                 memberPic = shrabonPic;

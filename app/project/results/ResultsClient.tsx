@@ -9,7 +9,7 @@ import shrabonPic from "../../team/Shrabon_Das .png";
 import nijumPic from "../../team/Nijum baruya.png";
 import mahadiPic from "../../team/mahadi_shakkhor .png";
 import ashrafulPic from "../../team/Ashraful.png";
-import fahimPic from "../../team/Fahim.png";
+import fahimPic from "../../team/Fahim_Awal_Faisal.png";
 import eloraPic from "../../team/Elora_Sharmin_Khan .png";
 
 interface MemberResultCard {
