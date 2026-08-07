@@ -21,6 +21,19 @@ interface TeamMember {
   github: string;
   email: string;
   researchgate: string;
+  image?: any;
+}
+
+interface Supervisor {
+  name: string;
+  title: string;
+  department: string;
+  institution: string;
+  bio: string;
+  researchFocus: string[];
+  email: string;
+  linkedin: string;
+  researchgate: string;
 }
 
 export const metadata = {
@@ -105,18 +118,19 @@ function CyberAvatar({ name, index, id }: { name: string; index: number; id: str
 }
 
 export default function TeamPage() {
-  const supervisor = {
-    name: "MOHAMMAD SHIDUJAMAN, PHD",
-    title: "Project Supervisor",
-    department: "Assistant Professor, Dept. of Computer Science & Engineering",
-    institution: "Independent University Bangladesh",
-    bio: "Assistant Professor at the Department of Computer Science & Engineering, Independent University Bangladesh, specializing in XAI, Robotics, and HCI.",
+  const supervisor: Supervisor = {
+    name: "Dr. M. F. Hossain",
+    title: "Project Supervisor & Assistant Professor",
+    department: "Department of Computer Science & Engineering",
+    institution: "Independent University, Bangladesh (IUB)",
+    bio: "Supervising multi-disciplinary autonomous systems engineering, computer vision research, edge computing optimizations, and sensor fusion architectures for intelligent mobile robotics.",
     researchFocus: [
-      "Explainable Artificial Intelligence and Robotics",
-      "Human Computer Interaction",
-      "Human Robot Interaction",
+      "Edge AI & Embedded Machine Learning",
+      "Autonomous Mobile Robotics",
+      "Sensor Fusion Architectures",
+      "Human-Robot Interaction (HRI)",
     ],
-    email: "shidujaman@iub.edu.bd",
+    email: "mfhossain@iub.edu.bd",
     linkedin: "https://www.linkedin.com/",
     researchgate: "https://www.researchgate.net/",
   };
@@ -127,6 +141,7 @@ export default function TeamPage() {
       id: "2230827",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "11th Semester",
+      image: shrabonPic,
       responsibilities: [
         "Project Architecture",
         "Frontend & UI Development",
@@ -143,6 +158,7 @@ export default function TeamPage() {
       id: "2231368",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "12th Semester",
+      image: nijumPic,
       responsibilities: [
         "Hardware Implementation",
         "Technical Documentation",
@@ -158,6 +174,7 @@ export default function TeamPage() {
       id: "2221486",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "14th Semester",
+      image: mahadiPic,
       responsibilities: [
         "Research Analysis",
         "Mathematical Equation Research",
@@ -172,6 +189,7 @@ export default function TeamPage() {
       id: "2010192",
       program: "B.Sc. in Computer Science (CS)",
       semester: "13th Semester",
+      image: ashrafulPic,
       responsibilities: [
         "Hardware Implementation",
         "Software Integration",
@@ -188,6 +206,7 @@ export default function TeamPage() {
       id: "2221506",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "14th Semester",
+      image: fahimPic,
       responsibilities: [
         "Hardware Implementation",
         "Technical Documentation",
@@ -202,6 +221,7 @@ export default function TeamPage() {
       id: "2231368",
       program: "B.Sc. in Computer Science & Engineering (CSE)",
       semester: "12th Semester",
+      image: eloraPic,
       responsibilities: [
         "Hardware Implementation",
         "Hardware Architecture Design",
@@ -305,7 +325,7 @@ export default function TeamPage() {
                     Core Research Focus
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {supervisor.researchFocus.map((focus) => (
+                    {supervisor.researchFocus.map((focus: string) => (
                       <span
                         key={focus}
                         className="rounded-sm bg-green-500/10 px-3 py-1 text-[10px] font-mono font-semibold text-green-400 border border-green-500/20"
@@ -367,21 +387,7 @@ export default function TeamPage() {
             {teamMembers.map((member, index) => {
               const isLeft = index % 2 === 0;
 
-              // Check if member has a profile photo
-              let memberPic = null;
-              if (member.name === "Nijum Barua") {
-                memberPic = nijumPic;
-              } else if (member.name === "Mohd Ashraful Islam") {
-                memberPic = ashrafulPic;
-              } else if (member.name.includes("Fahim")) {
-                memberPic = fahimPic;
-              } else if (member.name === "Shrabon Das") {
-                memberPic = shrabonPic;
-              } else if (member.name === "SM Mahadi Bhuiyan") {
-                memberPic = mahadiPic;
-              } else if (member.name === "Elora Sharmin Khan") {
-                memberPic = eloraPic;
-              }
+              const memberPic = member.image;
               
               return (
                 <div
